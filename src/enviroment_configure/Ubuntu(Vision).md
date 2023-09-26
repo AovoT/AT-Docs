@@ -187,6 +187,14 @@ lsmod | grep nouveau
 
 官网: https://www.nvidia.cn/Download/index.aspx?lang=cn
 
+直接进行这个
+```sh
+# install 
+chmod a+x ./NVIDA...
+sudo ./NVIDIA... -no-x-check -no-nouveau-check -no-opengl-files
+```
+
+删除 👇
 ``` sh
 # 卸载原有驱动
 sudo apt-get remove --purge nvidia*
@@ -274,11 +282,17 @@ samples: https://github.com/NVIDIA/cuda-samples  (示例， 用来测试)
 # sudo sh cuda_11.8.0_520.61.05_linux.run
 # sudo bash cuda_10.2.89_440.33.01_linux.run --toolkit --silent --override  # ||
 ```
-
+关于下载cuda时出现段错误核心转储的问题
+查看用户限制 ulimit -a  发现stack size为8192
+修改栈限制为无限  ulimit -s unlimited  之后便可正常下载
 ## 3. 配置系统变量
 
 ```shell
-sudo vim /etc/bash.bashrc  # vim 不熟练就用gedit
+# 这三个文件只用选一个添加，这里建议添加到~/.bashrc 或 /etc/profile
+sudo vim /etc/profile
+sudo vim ~/.bashrc
+sudo vim /etc/bash.bashrc
+# vim 不熟练就用gedit
 
 # 添加到系统变量
 export CUDA_HOME=/usr/local/cuda 
@@ -293,7 +307,7 @@ source /etc/bash.bashrc  # 更新环境变量
 
 用下载好的`samples`测试
 ```shell
-# 这个要自己下载  
+# 这个要自己下载(上面已经给出网址)
 cd /usr/local/cuda/samples/1_Utilities/deviceQuery # 根据自己下载的路径调整路径
 sudo make
 ./deviceQuery
@@ -367,7 +381,9 @@ sudo -H pip3 install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ## 1. 网址: 
 
-https://download.qt.io/archive/qt
+https://www.qt.io/download-open-source
+
+https://download.qt.io/archive/qt  # 已失效
 
 ~~https://blog.csdn.net/seedlint/article/details/119853636~~
 
@@ -387,7 +403,11 @@ vim ~/.bashrc
 # 或 配置在 /etc/profile
 sudo vim /etc/profile
 
-export CMAKE_PREFIX_PATH=/usr/local/Qt/5.15.2/gcc_64/lib/cmake${CMAKE_PREFIX_PATH:+:${CMAKE_PREFIX_PATH}}
+# Qt
+export QT_HOME=/usr/local/Qt/5.15.2
+export PATH=${QT_HOME}/gcc_64/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=${QT_HOME}/gcc_64/lib${LD_LIBRARY_PATH:+:${PATH}}
+export CMAKE_PREFIX_PATH=${QT_HOME}/gcc_64/lib/cmake${CMAKE_PREFIX_PATH:+:${CMAKE_PREFIX_PATH}}
 ```
 
 ## ~~1.3 open-GL~~
@@ -396,24 +416,7 @@ export CMAKE_PREFIX_PATH=/usr/local/Qt/5.15.2/gcc_64/lib/cmake${CMAKE_PREFIX_PAT
 # 对于Ubuntu，Qt得再安装缺少的open-GL，不然后面会遇到问题?
 sudo apt-get install mesa-common-dev
 ```
-
-# 六. OpenCV
-
-CSDN网址: https://blog.csdn.net/qq_25014669/article/details/104651894?spm=1001.2014.3001.5501
-
----
-
-代理网址:  https://ghproxy.com/
-
-使用方法(例): 下载时哪个报错往哪加代理
-
-"https://raw.githubusercontent.com/opencv/opencv_3rdparty/${IPPICV_COMMIT}/ippicv/" 
-
-"https://ghproxy.com/https://raw.githubusercontent.com/opencv/opencv_3rdparty/${IPPICV_COMMIT}/ippicv/"
-
-搜索`OPENCV_EXTRA_MODULES_PATH`，定位到opencv_contrib-4.1.1(扩展包)/modules
-
-# 七. Realsense库
+# 六. Realsense库
 
 精简版( 看完这个, 下面就不用看了 )
 
@@ -502,6 +505,23 @@ sudo make uninstall && make clean && make **-j8** && sudo make install
 
 安装完成后可在终端里输入realsense-viewer进行尝试检查是否安装完成
 
+# 七. OpenCV
+
+CSDN网址: https://blog.csdn.net/qq_25014669/article/details/104651894?spm=1001.2014.3001.5501
+
+---
+
+代理网址:  https://ghproxy.com/
+
+使用方法(例): 下载时哪个报错往哪加代理
+
+"https://raw.githubusercontent.com/opencv/opencv_3rdparty/${IPPICV_COMMIT}/ippicv/" 
+
+"https://ghproxy.com/https://raw.githubusercontent.com/opencv/opencv_3rdparty/${IPPICV_COMMIT}/ippicv/"
+
+搜索`OPENCV_EXTRA_MODULES_PATH`，定位到opencv_contrib-4.1.1(扩展包)/modules
+
+
 # 八. 安装日志库spdlog、队内库(kdrobotcpplib(依赖于spdlog))
 
 
@@ -589,6 +609,13 @@ export LD_LIBRARY_PATH=${TENSORRT_HOME}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH
 conda create --name pytorch python=3.9
 conda activate pytorch
 # 然后执行从官网上找到的命令
+```
+在终端运行：
+```sh
+python
+import torch
+print(torch.__version__)  来查看pytorch版本
+torch.cuda.is_available()  若返回True则说明 PyTorch 支持 CUDA 并且 CUDA 已正确配置。如果返回 False，则意味着 CUDA 配置可能存在问题。
 ```
 
 ## 12.2 Yolov5
