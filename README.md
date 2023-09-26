@@ -1,5 +1,3 @@
-> 此项目暂时为演示项目
-
 > 创建日期: 2023/9/21 20:00
 
 ```sh
@@ -7,13 +5,9 @@
 ├── img   # 所有src中的文档需要的图片等的资源存放处, 目录结构要与src中的结构一致
 ├── README.md
 └── src  # 存放所有文档
-    ├── 32scm  # 32单片机
     ├── 3rdlibs  # 第三方库
     │   ├── opencv
     │   └── qt
-    ├── 51scm  # 51 单片机
-    ├── algorithm  # 算法集合
-    │   └── KF
     ├── enviroment_configure  # 环境配置记录
     ├── framework  # 框架 
     |   └── ROS
