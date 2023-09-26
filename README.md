@@ -33,8 +33,9 @@
     │       ├── gcc/g++
     │       └── CMake
     ├── machine_learning  # 机器学习
+    ├── lidar  # 激光雷达
     ├── share  # 其他有用的链接等的分享
     │    ├── RM  # RM开源链接
-    │    └── RC  # RC开源链接
+    │    └── RC  # RC开演链接
     └── tools
 ```
