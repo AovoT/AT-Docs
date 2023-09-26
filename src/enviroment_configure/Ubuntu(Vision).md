@@ -1,25 +1,8 @@
-# 零. 前期环境准备
+# -1. TODO:
 
-1. 预留磁盘空间给Ubuntu(大概90~200G)自己看情况给
-2. BIOS设置(自己查自己牌子的电脑怎么进BIOS)
-   1. 禁用电脑的安全引导项 依次选择 Security -> security boot -> disable
-3. 插上启动盘后重启
-4. 自己查自己牌子的电脑怎么进U盘启动
-5. 进入安装界面后
-   1. 语言选择 English
-   2. 键盘布局选择Chinese
-   3. wifi先别连接
-   4. 最小安装、安装时不更新、安装无线模块及第三方库
-   5. 安装类型选择: 其他
-   6. 分区: 
-      1. /boot   2G
-      2. /swap  2G
-      3. /home  >= 50G
-      4. /           >= 60G 
-6. 换源
-7. 切换语言为中文
-8. 重启/重新登入后***保留英文目录名***
-9. 连接Wifi
+Realsense 联合编译
+
+双系统安全引导, BIOS配置
 
 # 一. 主要流程概述
 
@@ -155,7 +138,7 @@ N卡驱动有多种方法
 2. 下载官方驱动. 选择合适的驱动下载. 这里给出网址
 
    官网: https://www.nvidia.cn/
-
+   
    Download: https://www.nvidia.cn/Download/index.aspx?lang=cn
 
 3. 切换到虚拟终端中执行1. 2. (具体还需要其他操作, 请自行查找)
@@ -309,7 +292,6 @@ source /etc/bash.bashrc  # 更新环境变量
 ## 4. 测试CUDA
 
 用下载好的`samples`测试
-
 ```shell
 # 这个要自己下载  
 cd /usr/local/cuda/samples/1_Utilities/deviceQuery # 根据自己下载的路径调整路径
@@ -571,7 +553,6 @@ sh filename.sh    # 2.
 chmod a+x filename.sh  # 3.
 ./filename.sh
   ```
-
 查看Anaconda中创建的虚拟环境列表，可以使用以下命令：
 conda info --envs
 
@@ -632,9 +613,7 @@ conda activate tensorflow
 # 然后执行从官网上找到的命令
 pip install tensorflow==2.12.*
 ```
-
 ## 验证安装
-
 ### 验证 CPU 设置：
 
 ```sh
@@ -666,10 +645,9 @@ https://zhuanlan.zhihu.com/p/297002406
 # ~~十四. deep-wine(跳过)~~
 
 1. 卸载原来的depp-wine
-   sudo apt remove *deepin*wine* udis86
-   sudo apt autoremove -y
+sudo apt remove *deepin*wine* udis86
+sudo apt autoremove -y
 2. 下载deep-wine
-
 ```shell
 cd ~
 wget https://deepin-wine.i-m.dev/setup.sh
