@@ -10,6 +10,8 @@
 
 # 二. `pull requests`说明
 
+有创建新分支->并入主分支，fork后两次提交到新分支两种方法
+
 ## 2.1. 新分支
 
 ### 终端操作
@@ -24,6 +26,32 @@ git commit -m "注释"
 git push -u origin 新的分支的名称
 ```
 
-### web操作
+### Web操作
 
 之后转到 `github` 页面, 点击 `Pull requests` -> `New pull requests` -> 将右侧 `compare`: 改成新创建的分支 -> 点击 `Create pull request`
+
+## 2.2. Fork
+
+### Web操作
+
+在本仓库主页，点击右上角`Fork`拉取到自己的仓库
+
+### 终端操作
+
+```shell
+git clone Fork后的仓库链接
+
+# 对文件进行具体体修改
+
+git add .
+git commit -m "注释"
+git push -u origin master(主分支名称)
+```
+
+### Web操作
+
+转到自己fork的仓库，刷新后显示
+
+> This branch is [(num) commits ahead](https://github.com/NobleFlower/AT-Docs/compare/AovoT:AT-Docs:master...master) of AovoT:master.
+
+点击本条目右边`Contribute`->`Open pull requests`，接下来无需修改，点击`Create pull request`
