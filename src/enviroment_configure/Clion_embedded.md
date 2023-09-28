@@ -1,5 +1,8 @@
 > 使用Clion进行嵌入式开发
 
+> 参考链接: https://zhuanlan.zhihu.com/p/145801160
+
+
 # 一. 环境所需工具
 
 ### windows
