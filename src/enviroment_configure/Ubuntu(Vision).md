@@ -1,8 +1,30 @@
-# -1. TODO:
+> Ubuntu环境配置(包含一般环境配置和机器视觉环境配置)
 
-Realsense 联合编译
+> 附自动化配置脚本: https://github.com/yxVision/UbuntuAutoConfigure
 
-双系统安全引导, BIOS配置
+# 零. 前期环境准备
+
+1. 预留磁盘空间给Ubuntu(大概90~200G)自己看情况给
+2. BIOS设置(自己查自己牌子的电脑怎么进BIOS)
+   1. 禁用电脑的安全引导项 依次选择 Security -> security boot -> disable
+3. 插上启动盘后重启
+4. 自己查自己牌子的电脑怎么进U盘启动
+5. 进入安装界面后
+   1. 语言选择 English
+   2. 键盘布局选择Chinese
+   3. wifi先别连接
+   4. 最小安装、安装时不更新、安装无线模块及第三方库
+   5. 安装类型选择: 其他
+   6. 分区:
+      1. /boot          2G
+      2. /swap          2G
+      3. /home       >= 50G
+      4. /           >= 60G
+6. 安装完成后安装提示拔掉U盘
+7. 重启后进入系统先换源
+8. 切换语言为中文
+9. 重启/重新登入后***保留英文目录名***
+10. 连接Wifi
 
 # 一. 主要流程概述
 
@@ -29,6 +51,7 @@ Realsense 联合编译
 搜狗拼音: https://pinyin.sogou.com/linux/?r=pinyin 
 
 视觉环境配置参考CSDN网址: 
+
 https://blog.csdn.net/qq_25014669/article/details/104651894?spm=1001.2014.3001.5501
 
 https://blog.csdn.net/kunhe0512/article/details/125061911
