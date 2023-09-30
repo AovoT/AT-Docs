@@ -1,6 +1,6 @@
 > Ubuntu环境配置(包含一般环境配置和机器视觉环境配置)
 
-> 附自动化配置脚本: https://github.com/yxVision/Ubuntu-auto-configure
+> 附自动化配置脚本: https://github.com/yxVision/UbuntuAutoConfigure
 
 # 零. 前期环境准备
 
