@@ -4,7 +4,7 @@
 
 [CLI](https://github.com/AovoT/AT-Docs/tree/master/src/CLI): Command Line Interface, 使用命令行操作的一些东西(如: git、conda、pip)
 
-[environment_configure](https://github.com/AovoT/AT-Docs/tree/master/src/environment_configure): 一些环境配置记录
+[environment_configure](https://github.com/AovoT/AT-Docs/tree/master/src/enviroment_configure): 一些环境配置记录
 
 [3rdlibs](https://github.com/AovoT/AT-Docs/tree/master/src/3rdlibs): 第三方库
 
