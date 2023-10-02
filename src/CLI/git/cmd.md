@@ -44,11 +44,11 @@ git push origin -d [branch name]  # 删除远程仓库分支
 ```
 
 git 分支介绍:
-一般分为:
-master
-develop
-feature
-(hot fix)
+一般有:
+
+- master
+- develop
+- fix-xxx
 
 # 四. 远程仓库相关
 
@@ -64,7 +64,82 @@ git push <远程主机名> <本地分支名>  # 如果本地分支名与远程�
 git push origin -d [branch name]  # 删除远程仓库分支
 ```
 
-# 五. 其他(关于一些错误信息的解决)
+# 五. git 时光机(撤销)
+
+> 参考视频链接: https://www.bilibili.com/video/BV1ne4y1S7S9/
+
+首先明确 `git` 四个区域
+
+- Disk (磁盘) 修改文件之后
+- Staging (暂存区) git add 之后进入
+- Local (本地仓库) git commit 之后进入
+- Remote (远程仓库) git push 之后进入
+
+***文件*** ------修改------->  ***Disk(changed)***  ----`git add`--->  ***Staging***  ----`commit`----> ***Local*** ----`push`----> ***Remote***
+
+## 5.1 Disk中撤销
+
+### 5.1.1 在文件进入 `Disk`之后撤销对文件的修改
+
+```shell
+git checkout <changed_filename> # old
+# OR
+git restore <changed_filename>  # new version
+```
+
+## 5.2 Staging 中撤销
+
+从 Staging 移除, 保留 Disk 中的修改
+
+```shell
+git reset <changed_filename>
+# OR
+git restore --staged <changed_filename>
+```
+
+从Staging、Disk中移除
+
+```shell
+git checkout HEAD <changed_file>  # HEAD 表示最近的一次 commit
+```
+
+# 5.3 Local 中撤销
+
+只撤销 `commit`(即从Local中移除)
+
+```shell
+git reset --soft HEAD~1  # HEAD~1 表示之前一个
+```
+
+同时撤销 `commit` 和 `add`(保留磁盘中的修改)
+
+```shell
+git reset HEAD~1
+# OR
+git reset --mixed HEAD~1
+```
+
+同时撤销 `commit` 和 `add` 和 磁盘中的修改
+
+```shell
+git reset --hard HEAD~1
+```
+
+***另外一种撤销方式***
+
+```shell
+git revert HEAD  # 一个 OR 多个 commit
+```
+
+`git revert` 会把撤销之后的结果单独创建一个 `commit` (即撤销之后, 把撤销之后仓库的状态 `commit`, 创建一个新的 `-change commit`)
+
+## 5.4 Remote 中撤销
+
+如果是 **公有分支** 那么必须使用 `git revert`
+
+非共有分支(个人分支)可以使用 `git reset`, 然后使用 `git push -f` 提交
+
+# 其他(关于一些错误信息的解决)
 
 在第一次提交后，之后的提交提示
 
