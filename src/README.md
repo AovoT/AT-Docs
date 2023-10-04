@@ -6,6 +6,9 @@
 
 [environment_configure](https://github.com/AovoT/AT-Docs/tree/master/src/enviroment_configure): 一些环境配置记录
 
+[hardware](https://github.com/AovoT/AT-Docs/tree/master/src/hardware):相关硬件
+
 [3rdlibs](https://github.com/AovoT/AT-Docs/tree/master/src/3rdlibs): 第三方库
 
 [share](https://github.com/AovoT/AT-Docs/tree/master/src/share): 一些链接等的分享
+
