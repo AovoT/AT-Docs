@@ -530,7 +530,11 @@ sudo make uninstall && make clean && make **-j8** && sudo make install
 
 # 七. OpenCV
 
-CSDN网址: https://blog.csdn.net/qq_25014669/article/details/104651894?spm=1001.2014.3001.5501
+github: 
+- (base): https://github.com/opencv/opencv
+- (contrib): https://github.com/opencv/opencv_contrib
+
+CSDN网址: https://blog.csdn.net/qq_25014669/article/details/104651894
 
 ---
 
@@ -547,14 +551,24 @@ CSDN网址: https://blog.csdn.net/qq_25014669/article/details/104651894?spm=1001
 
 # 八. 安装日志库spdlog、队内库(kdrobotcpplib(依赖于spdlog))
 
+## 8.1 spdlog
 
 ```shell
 # 解压
+# 或从 github 上下载
+git clone https://github.com/gabime/spdlog
 
-mkdir build && cd build
-cmake ../
-sudo make install
+# 编译安装
+cmake -B build && cmake --build && sudo cmake --build build --target install
 sudo vim /etc/profile # 配置环境变量
+```
+
+## 8.2 KdRobotCppLibs
+```shell
+# 解压
+
+# 编译安装
+cmake -B build && cmake --build && sudo cmake --build build --target install
 ```
 
 ```properties
