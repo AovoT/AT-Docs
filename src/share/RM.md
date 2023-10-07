@@ -45,3 +45,11 @@ KF && other: https://sjtu-robomaster-team.github.io/
 ## 1.5 哨兵导航
 
 沈阳航空航天大学TUP战队2023年哨兵导航模块: https://github.com/tup-robomaster/TUP2023-Sentry-Nav
+
+RM2023华南农业大学Taurus机器人战队哨兵定位导航算法与仿真开源: https://github.com/SCAU-RM-NAV/rm2023_auto_sentry_ws
+
+## 1.6 工程视觉
+
+RM2023-华南理工大学-华南虎-工程视觉开源: https://bbs.robomaster.com/forum.php?mod=viewthread&tid=22811&fromuid=78525 (出处: RoboMaster)
+
+pdf: https://bbs.robomaster.com/forum.php?mod=attachment&aid=MzMyNzV8M2U2MGQ2M2N8MTY5NjY2NjQyOXw3ODUyNXwyMjgxMQ%3D%3D
