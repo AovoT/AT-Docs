@@ -8,6 +8,7 @@
 
 cd /tmp && \
 git clone https://github.com/gflags/gflags.git --depth=1 && \
+cd gflags && \
 cmake -B build -G "Ninja" -DBUILD_SHARED_LIBS=ON && cmake --build build && sudo cmake --build build --target install
 ```
 
@@ -23,6 +24,7 @@ target_link_libraries(${PROJECT_NAME gflags)
 ```shell
 cd /tmp && \
 git clone https://github.com/google/glog.git --depth=1 && \
+cd glog && \
 cmake -B build -G "Ninja" && cmake --build build && sudo cmake --build build --target install
 ```
 
@@ -52,6 +54,7 @@ FetchContent_MakeAvailable(googletest)
 ```shell
 cd /tmp && \
 git clone https://github.com/google/googletest.git --depth=1 && \
+cd googletest && \
 cmake -B build -G "Ninja" && cmake --build build && sudo cmake --build build --target install
 ```
 
