@@ -1,6 +1,6 @@
 > Ubuntu环境配置(包含一般环境配置和机器视觉环境配置)
 
-> 附自动化配置脚本: https://github.com/yxVision/UbuntuAutoConfigure
+> 附自动化配置脚本: https://github.com/yxSakana/UbuntuAutoConfigure
 
 # 零. 前期环境准备
 
@@ -10,21 +10,35 @@
 3. 插上启动盘后重启
 4. 自己查自己牌子的电脑怎么进U盘启动
 5. 进入安装界面后
-   1. 语言选择 English
-   2. 键盘布局选择Chinese
+   1. 语言选择 English![](../../img/enviroment_configure/Ubuntu(Vision)/1.jpg)
+   2. 键盘布局选择Chinese![](../../img/enviroment_configure/Ubuntu(Vision)/2.jpg)
    3. wifi先别连接
-   4. 最小安装、安装时不更新、安装无线模块及第三方库
-   5. 安装类型选择: 其他
-   6. 分区:
-      1. /boot          2G
-      2. /swap          2G
-      3. /home       >= 50G
-      4. /           >= 60G
+   4. 最小安装、安装时不更新、安装无线模块及第三方库![](../../img/enviroment_configure/Ubuntu(Vision)/3.jpg)
+   5. 安装类型选择: 其他![](../../img/enviroment_configure/Ubuntu(Vision)/4.jpg)
+   6. 分区:![](../../img/enviroment_configure/Ubuntu(Vision)/5.jpg)
+      1. /boot          2G![](../../img/enviroment_configure/Ubuntu(Vision)/6.jpg)
+      2. /swap          2G![](../../img/enviroment_configure/Ubuntu(Vision)/7.jpg)
+      3. /home       >= 50G![](../../img/enviroment_configure/Ubuntu(Vision)/9.jpg)
+      4. /           >= 60G![](../../img/enviroment_configure/Ubuntu(Vision)/8.jpg)
+      5. 之后![](../../img/enviroment_configure/Ubuntu(Vision)/10.jpg)![](../../img/enviroment_configure/Ubuntu(Vision)/11.jpg)![](../../img/enviroment_configure/Ubuntu(Vision)/12.jpg)
+      6. 设置名称密码   名称（自己姓名首字母小写）  密码（aaa）![](../../img/enviroment_configure/Ubuntu(Vision)/13.jpg)
 6. 安装完成后安装提示拔掉U盘
-7. 重启后进入系统先换源
-8. 切换语言为中文
-9. 重启/重新登入后***保留英文目录名***
-10. 连接Wifi
+7. 切换语言为中文![](../../img/enviroment_configure/Ubuntu(Vision)/15.jpg)
+8. 重启/重新登入后***保留英文目录名*** i![](../../img/enviroment_configure/Ubuntu(Vision)/14.jpg)
+9. 连接Wif
+10. 系统换源
+
+点击软件与更新
+
+![](../../img/enviroment_configure/Ubuntu(Vision)/17.jpg)
+
+点击其它
+
+![](../../img/enviroment_configure/Ubuntu(Vision)/18.jpg)
+
+选择阿里源
+
+![](../../img/enviroment_configure/Ubuntu(Vision)/19.jpg)
 
 # 一. 主要流程概述
 
@@ -530,7 +544,11 @@ sudo make uninstall && make clean && make **-j8** && sudo make install
 
 # 七. OpenCV
 
-CSDN网址: https://blog.csdn.net/qq_25014669/article/details/104651894?spm=1001.2014.3001.5501
+github: 
+- (base): https://github.com/opencv/opencv
+- (contrib): https://github.com/opencv/opencv_contrib
+
+CSDN网址: https://blog.csdn.net/qq_25014669/article/details/104651894
 
 ---
 
@@ -547,14 +565,24 @@ CSDN网址: https://blog.csdn.net/qq_25014669/article/details/104651894?spm=1001
 
 # 八. 安装日志库spdlog、队内库(kdrobotcpplib(依赖于spdlog))
 
+## 8.1 spdlog
 
 ```shell
 # 解压
+# 或从 github 上下载
+git clone https://github.com/gabime/spdlog
 
-mkdir build && cd build
-cmake ../
-sudo make install
+# 编译安装
+cmake -B build && cmake --build && sudo cmake --build build --target install
 sudo vim /etc/profile # 配置环境变量
+```
+
+## 8.2 KdRobotCppLibs
+```shell
+# 解压
+
+# 编译安装
+cmake -B build && cmake --build && sudo cmake --build build --target install
 ```
 
 ```properties

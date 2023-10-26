@@ -201,5 +201,52 @@ https://blog.csdn.net/boysky0015/article/details/78160825  (这个就是第三�
    fi' --subdirectory-filter subdirectory HEAD
    ```
 
+# 六、git仓库体积精简
+
+## 6.1 查看仓库体积
+
+   ```bash
+   git count-objects -vH
+   ```
+
+## 6.2 查找大文件
+
+   可查看占用空间最大的前15个文件，`head -15`中的数字即为显示数量
    
+   ```bash
+   git rev-list --all | xargs -rL1 git ls-tree -r --long | sort -uk3 | sort -rnk4 | head -15
+   ```
+   
+## 6.3 遍历提交记录并删除大文件对象
+
+   **注意：** 本地仓库不能有修改
+
+   ```bash
+   git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch 文件相对于终端的路径' --prune-empty --tag-name-filter cat -- --all
+   # 若要删除整个文件夹，则把路径改为文件夹目录，并加上 -r
+   git filter-branch --force --index-filter 'git rm --cached -r --ignore-unmatch 文件夹相对于终端的路径' --prune-empty --tag-name-filter cat -- --all
+   ```
+   
+## 6.4 本地仓库回收空间
+
+   
+   ```bash
+   # 删除本地仓库引用
+   rm -rf .git/refs/original/
+   # 设置所有reflog条目现在过期
+   git reflog expire --expire=now --all
+   # 回收空间，移除无效或异常的文件
+   git gc --aggressive --prune=now
+   ```
+
+   可再查看仓库体积进行对比
+   
+## 6.5 强制推送至远端
+
+    ```bash
+    git push origin --force --all
+    ```
+    
+
+
 

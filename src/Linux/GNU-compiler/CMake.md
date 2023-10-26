@@ -38,6 +38,11 @@ find_package(Qt5 COMPONENTS Core Widgets SerialPort REQUIRED)
 target_link_libraries(${PROJECT_NAME} ${LIBRARY})
 
 # 安装
+install(TARGETS <目标名称>
+    DESTINATION <下载路径>
+)
+
+# 进阶 --> 导出集(*Config.cmake)
 install(TARGETS ${PROJECT_NAME} # 要安装的目标
 	 CONFIGURATIONS ${CMAKE_BUILD_TYPE} # 要安装的构建类类型（Debug 或 Release 等）
 	 EXPORT ${PROJECT_NAME}-targets  # 导出
