@@ -23,10 +23,22 @@
       5. 之后![](../../img/enviroment_configure/Ubuntu(Vision)/10.jpg)![](../../img/enviroment_configure/Ubuntu(Vision)/11.jpg)![](../../img/enviroment_configure/Ubuntu(Vision)/12.jpg)
       6. 设置名称密码   名称（自己姓名首字母小写）  密码（aaa）![](../../img/enviroment_configure/Ubuntu(Vision)/13.jpg)
 6. 安装完成后安装提示拔掉U盘
-7. 重启后进入系统先换源
-8. 重启/重新登入后***保留英文目录名 *** ![](../../img/enviroment_configure/Ubuntu(Vision)/14.jpg)
-9. 切换语言为中文![](../../img/enviroment_configure/Ubuntu(Vision)/15.jpg)
-10. 连接Wifi
+7. 切换语言为中文![](../../img/enviroment_configure/Ubuntu(Vision)/15.jpg)
+8. 重启/重新登入后***保留英文目录名*** i![](../../img/enviroment_configure/Ubuntu(Vision)/14.jpg)
+9. 连接Wif
+10. 系统换源
+
+点击软件与更新
+
+![](../../img/enviroment_configure/Ubuntu(Vision)/17.jpg)
+
+点击其它
+
+![](../../img/enviroment_configure/Ubuntu(Vision)/18.jpg)
+
+选择阿里源
+
+![](../../img/enviroment_configure/Ubuntu(Vision)/19.jpg)
 
 # 一. 主要流程概述
 
