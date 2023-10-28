@@ -1,42 +1,69 @@
-> Ubuntu环境配置(包含一般环境配置和机器视觉环境配置)
+> Ubuntu环境配置(包含传统视觉环境配置和深度视觉环境配置)
 
 > 附自动化配置脚本: https://github.com/yxSakana/UbuntuAutoConfigure
 
 # 零. 前期环境准备
 
-1. 预留磁盘空间给Ubuntu(大概90~200G)自己看情况给
-2. BIOS设置(自己查自己牌子的电脑怎么进BIOS)
-   1. 禁用电脑的安全引导项 依次选择 Security -> security boot -> disable
-3. 插上启动盘后重启
-4. 自己查自己牌子的电脑怎么进U盘启动
-5. 进入安装界面后
-   1. 语言选择 English![](../../img/enviroment_configure/Ubuntu(Vision)/1.jpg)
+1. 制作系统盘
+   硬件需要一个u盘和一台电脑，软件需要Rufus(官方推荐烧录软件)和所要制作的Ubuntu版本镜像
+
+   (镜像下载地址): https://ubuntu.com/download/desktop 统一下载20.04的版本
+
+   (制作Ubuntu启动u盘): [https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview](#1-overview)
+
+   注意事项：如果发现自己制作的启动盘，在BIOS界面不显示，可能是自己U盘的问题，如果要购买U盘，提前问好商家是否可以制作启动盘。
+   
+2. 预留磁盘空间给Ubuntu,第一次装都装120G,后期重装自己看情况给
+
+   点击磁盘管理,选择一个内存富裕的分区 ，右击 ->“压缩卷,要注意内存在磁盘上需要是连续的，即最好只从一个盘腾地方,压缩完成之后，在你选择压缩的分区上的图形化显示会出现灰色条，即证明成功
+
+   ![](../../img/enviroment_configure/Ubuntu(Vision)/图片1.png)
+
+   ![](../../img/enviroment_configure/Ubuntu(Vision)/图片2.png)
+
+3. BIOS设置(自己查自己牌子的电脑怎么进BIOS)
+
+    禁用电脑的安全引导项 依次选择 Security -> security boot -> disable
+
+4. 插上启动盘后重启
+
+5. 自己查自己牌子的电脑怎么进U盘启动
+
+6. 进入安装界面后
+   1. 语言选择 English,后点击Install Ubuntu![](../../img/enviroment_configure/Ubuntu(Vision)/1.jpg)
    2. 键盘布局选择Chinese![](../../img/enviroment_configure/Ubuntu(Vision)/2.jpg)
    3. wifi先别连接
    4. 最小安装、安装时不更新、安装无线模块及第三方库![](../../img/enviroment_configure/Ubuntu(Vision)/3.jpg)
-   5. 安装类型选择: 其他![](../../img/enviroment_configure/Ubuntu(Vision)/4.jpg)
+   5. 选择Something else,之后继续点Continue![](../../img/enviroment_configure/Ubuntu(Vision)/4.jpg)
    6. 分区:![](../../img/enviroment_configure/Ubuntu(Vision)/5.jpg)
       1. /boot          2G![](../../img/enviroment_configure/Ubuntu(Vision)/6.jpg)
       2. /swap          2G![](../../img/enviroment_configure/Ubuntu(Vision)/7.jpg)
       3. /home       >= 50G![](../../img/enviroment_configure/Ubuntu(Vision)/9.jpg)
       4. /           >= 60G![](../../img/enviroment_configure/Ubuntu(Vision)/8.jpg)
       5. 之后![](../../img/enviroment_configure/Ubuntu(Vision)/10.jpg)![](../../img/enviroment_configure/Ubuntu(Vision)/11.jpg)![](../../img/enviroment_configure/Ubuntu(Vision)/12.jpg)
-      6. 设置名称密码   名称（自己姓名首字母小写）  密码（aaa）![](../../img/enviroment_configure/Ubuntu(Vision)/13.jpg)
-6. 安装完成后安装提示拔掉U盘
-7. 切换语言为中文![](../../img/enviroment_configure/Ubuntu(Vision)/15.jpg)
-8. 重启/重新登入后***保留英文目录名*** i![](../../img/enviroment_configure/Ubuntu(Vision)/14.jpg)
-9. 连接Wif
-10. 系统换源
+      6. 设置名称密码   名称（自己姓名首字母小写）  密码统一设置为aaa![](../../img/enviroment_configure/Ubuntu(Vision)/13.jpg)
+
+7. 安装完成后重启，耐心等待提示（自己翻译），拔掉U盘后按enter键
+
+8. 再次进入后，打开设置切换语言为中文,换完会提示你登出，登出就行
+
+9. ![](../../img/enviroment_configure/Ubuntu(Vision)/15.jpg)
+
+10. 重新登入后***保留英文目录名***   keep old names![](../../img/enviroment_configure/Ubuntu(Vision)/14.jpg)
+
+11. 连接Wifi
+
+12. 系统换源
 
 点击软件与更新
 
-![](../../img/enviroment_configure/Ubuntu(Vision)/17.jpg)
+![](../../img/enviroment_configure/Ubuntu(Vision)/换源.jpg)
 
 点击其它
 
 ![](../../img/enviroment_configure/Ubuntu(Vision)/18.jpg)
 
-选择阿里源
+选择阿里源,关闭后会出现重新载入,重新载入即可
 
 ![](../../img/enviroment_configure/Ubuntu(Vision)/19.jpg)
 
