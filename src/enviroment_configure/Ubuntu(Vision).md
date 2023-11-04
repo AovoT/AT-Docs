@@ -136,7 +136,7 @@ sudo hwclock --localtime --systohc
 sudo apt install rar unrar
 # unrar
 mkdir typora
-unrar e typora1.2.4_Linux.rar -d typora
+unrar e typora1.2.4\ Linux.rar -d typora
 # install
 sudo dpkg -i typora_1.2.4_amd64.deb
 # replace asar
