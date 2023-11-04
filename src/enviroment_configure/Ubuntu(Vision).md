@@ -158,9 +158,10 @@ sudo apt install rar unrar
 mkdir typora
 unrar e typora1.2.4_Linux.rar -d typora
 # install
+cd typora
 sudo dpkg -i typora_1.2.4_amd64.deb
 # replace asar
-sudo cp typora/app.asar /usr/share/typora/resources
+sudo cp ./app.asar /usr/share/typora/resources
 ```
 
 # 五.星火应用商店安装
