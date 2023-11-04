@@ -43,11 +43,11 @@
       5. 之后![](../../img/enviroment_configure/Ubuntu(Vision)/10.jpg)![](../../img/enviroment_configure/Ubuntu(Vision)/11.jpg)![](../../img/enviroment_configure/Ubuntu(Vision)/12.jpg)
       6. 设置名称密码   名称（自己姓名首字母小写）  密码统一设置为aaa![](../../img/enviroment_configure/Ubuntu(Vision)/13.jpg)
 
-7. 安装完成后重启，耐心等待提示（自己翻译），拔掉U盘后按enter键
+7. 安装完成后重启，耐心等待一段英文提示，拔掉U盘后按enter键
 
 8. 再次进入后，打开设置切换语言为中文,换完会提示你登出，登出就行
 
-9. ![](../../img/enviroment_configure/Ubuntu(Vision)/15.jpg)
+    ![](../../img/enviroment_configure/Ubuntu(Vision)/15.jpg)
 
 10. 重新登入后***保留英文目录名***   keep old names![](../../img/enviroment_configure/Ubuntu(Vision)/14.jpg)
 
@@ -67,9 +67,15 @@
 
 ![](../../img/enviroment_configure/Ubuntu(Vision)/19.jpg)
 
+```markdown
+换源后执行一次  sudo apt update && sudo apt upgrade
+```
+
 # 一. 主要流程概述
 
--> 搜狗拼音 -> 双系统时间同步 -> typora -> 星火(非必要, 但推荐)
+这是一开始最基本的流程概述，之后按照学习的东西不同再安装其他的
+
+-> 搜狗拼音 -> 双系统时间同步 -> typora
 
 -> N卡 ->  cuda -> cuDNN 
 
@@ -77,27 +83,11 @@
 
 -> 日志库spdlog、队内库(kdrobotcpplib(依赖于spdlog)
 
--> yolov3() 
-
--> TensorRT(intel) 
-
--> Anaconda(python的包管理系统) -> (另附)关于Python环境的搭建
-
--> Pytorch(依赖anaconda)
-
- -> TensorFlow(依赖anaconda) 
-
--> IDE -> FSearch
-
-搜狗拼音: https://pinyin.sogou.com/linux/?r=pinyin 
-
 视觉环境配置参考CSDN网址: 
 
 https://blog.csdn.net/qq_25014669/article/details/104651894?spm=1001.2014.3001.5501
 
-https://blog.csdn.net/kunhe0512/article/details/125061911
 
-https://blog.csdn.net/weixin_60864335/article/details/126671341
 
 ---
 
@@ -118,36 +108,26 @@ https://blog.csdn.net/weixin_60864335/article/details/126671341
 
 # 二. 搜狗安装
 
-官网：https://pinyin.sogou.com/linux?r=pinyin
+官网网址：https://pinyin.sogou.com/linux?r=pinyin   下载x86_64
+![](../../img/enviroment_configure/Ubuntu(Vision)/sougou.png)
 
-官方教程: https://shurufa.sogou.com/linux/guide
 
-下载x86_64     ubuntu22.04系统也适用
 
-~~***在?为什么给了网址还要抄一遍???***~~
+官方教程: https://shurufa.sogou.com/linux/guide 
 
-```sh
-sudo apt update #更新源
-sudo apt 
-sudo apt install fcitx
-# 语言支持->选择fcitx
-sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/  # 开机自启动
-sudo apt purge ibus  # 卸载ibus框架
-sudo dpkg -i 安装包名  # 安装
-# 安装依赖
-sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
-sudo apt install libgsettings-qt1
-# 重启电脑
-reboot
-```
+教程中直接往下拉到如图所示，之后跟着教程走就行![](../../img/enviroment_configure/Ubuntu(Vision)/sougou_1.png)
 
 # 三. 双系统时间同步问题
+
+具体为什么安装完双系统后windows系统时间会错误，可以自己去查查
 
 ```sh
 sudo apt install ntpdate
 sudo ntpdate time.windows.com
 sudo hwclock --localtime --systohc
 ```
+
+执行完之后在windows系统中更新一次时间就不会出错了
 
 # 四.Typora安装
 
@@ -158,19 +138,10 @@ sudo apt install rar unrar
 mkdir typora
 unrar e typora1.2.4_Linux.rar -d typora
 # install
-cd typora
 sudo dpkg -i typora_1.2.4_amd64.deb
 # replace asar
 sudo cp ./app.asar /usr/share/typora/resources
 ```
-
-# 五.星火应用商店安装
-
-官网: https://www.spark-app.store/
-
-视频教程(bilibili)：https://www.bilibili.com/video/BV1WL4y1P7LS/?spm_id_from=333.880.my_history.page.click&vd_source=d9f539810e996eac76f619a3a7c9019 up的其他视频也可以看看
-
-在星火安装QQ和微信以及其他软件时可以和windows平台一样便捷,主要用来安装QQ和微信等(方便文件传输),但不要依赖,学会命令行操作是基本技能
 
 ---
 
@@ -190,32 +161,7 @@ sudo apt install -y \
 
 ***注意：视觉环境各个组件之间的版本要求极为严苛,一定要按照官方版本要求来***
 
-# 一. N卡驱动
-
-CSDN: https://blog.csdn.net/qq_25014669/article/details/104651894?spm=1001.2014.3001.5501
-
-N卡驱动有多种方法
-
-0. 都需要 配置禁用列表(网上给出的禁用列表也不尽相同)
-
-1. apt 安装. 就像上面文章一样查找合适驱动, 用apt去安装
-
-2. 下载官方驱动. 选择合适的驱动下载. 这里给出网址
-
-   官网: https://www.nvidia.cn/
-   
-   Download: https://www.nvidia.cn/Download/index.aspx?lang=cn
-
-3. 切换到虚拟终端中执行1. 2. (具体还需要其他操作, 请自行查找)
-
-4. 利用图形界面安装(一般不好使)
-   左下角(~~九筒~~) -> 软件与更新(software and update) -> 附加驱动去下载
-
----
-
----
-
-以下只写最稳定靠谱的方式,即使用官方的NVIDIA驱动进行手动安装
+# 一. N卡驱动（只适用于NVIDIA独显）
 
 ## 1.禁用nouveau(nouveau是通用的驱动程序)
 
@@ -248,97 +194,55 @@ reboot
 lsmod | grep nouveau
 ```
 
-## 2. 根据自己的显卡型号下载对应驱动
+## 2.安装N卡驱动
 
-官网: https://www.nvidia.cn/Download/index.aspx?lang=cn
+安装N卡驱动有多种方法，但都要做第一步，即禁用nouveau
 
-直接进行这个
-```sh
-# install 
-chmod a+x ./NVIDA...
-sudo ./NVIDIA... -no-x-check -no-nouveau-check -no-opengl-files
-```
+1. 从英伟达官方下载驱动并安装，推荐使用这种方法，以下给出网址：
 
-删除 👇
-``` sh
-# 卸载原有驱动
-sudo apt-get remove --purge nvidia*
-sudo apt autoremove
-sudo apt remove xserver-xorg-video-nouveau
+   官网: https://www.nvidia.cn/
 
-# stop gui
-sudo service gdm stop
+   Download: https://www.nvidia.cn/Download/index.aspx?lang=cn（根据自己的电脑显卡型号下载合适的驱动）
 
-# install 
-chmod a+x ./NVIDA...
-sudo ./NVIDIA... -no-x-check -no-nouveau-check -no-opengl-files
+   视频教程https://www.bilibili.com/video/BV1wY411p7mU?p=1&vd_source=d9f539810e996eac76f619a3a7c90193
 
-sudo service gdm start
-```
+2. 命令行安装
 
-## ~~3.安装lightdm~~
+   ```markdown
+   ubuntu-drivers devices #首先在终端输入这条命令查看适合驱动
+   查看recommended版本，比如我这里为535 #看你自己的推荐版本是什么
+   ```
 
-lightdm是显示管理器，主要管理登录界面，ubuntu20.04、21.04、22.04需要自行安装,然后上下键选择lightdm即可
+   ![](../../img/enviroment_configure/Ubuntu(Vision)/nvidia驱动.png)
 
-``` sh
-sudo apt-get install lightdm
-```
+   ```markdown
+   之后安装推荐驱动的server版本，箭头所指
+   即执行sudo apt install nvidia-driver-535-server
+   ```
 
----
+   之后可能会出现报缺少依赖的错误，缺什么就sudo apt install 什么，安装完依赖后再次执行安装驱动的命令
 
----
+3. ubuntu的UI界面中安装
+   打开转件和更新
+   ![](../../img/enviroment_configure/Ubuntu(Vision)/nvidia驱动_1.png)
 
-以下这个跳过
+   选择你的推荐版本->应用更改，同样可能会出现缺少依赖的错误，缺少什么就sudo apt install 什么
 
-```shell
-sudo vim /etc/modprobe.d/blacklist.conf
-```
+   在此给出一个第二种方法和第三种发法的视频教程：https://www.bilibili.com/video/BV1Mg4y1p7uN/?spm_id_from=333.788.top_right_bar_window_history.content.click
 
-向该文件中添加:
+# 二. CUDA和CUDNN
 
-```properties
-#blacklist vga16fb
-blacklist nouveau
-blacklist rivafb
-blacklist rivatv
-blacklist nvidiafb
+几个相关教程：https://blog.csdn.net/kunhe0512/article/details/125061911
 
-# 或
-blacklist amd76x_edac
-blacklist nouveau
-options nouveau modeset=0
-```
+​          			   https://blog.csdn.net/weixin_60864335/article/details/126671341
 
-驱动安装
-
-```shell
-sudo add-apt-repository ppa:graphics-drivers/ppa  # 添加Nvidia驱动源
-sudo apt update
-ubuntu-drivers devices #查看适合驱动
-lspci | grep -i vga
-```
-
----
-
-(附: 一个错误解决方案记录)
-`sudo update-initramfs -u` 报错后
-
-```shell
-sudo update-initramfs -u
-blkid | awk -F\" '/swap/ {print $2}'
-printf "RESUME=UUID=$(blkid | awk -F\" '/swap/ {print $2}')\n" | sudo tee /etc/initramfs-tools/conf.d/resume
-sudo update-initramfs -u
-```
-
-# 二. CUDA
-
-## 1. 网址: 
+## 1.1 cuda网址
 
 官网: https://developer.nvidia.com/cuda-toolkit-archive
 
 samples: https://github.com/NVIDIA/cuda-samples  (示例， 用来测试)
 
-## 2. runfile(ubuntu 20.04): 
+## 1.2runfile(ubuntu 20.04)
 
 跟着官网命令做(选择runfile)
 
@@ -350,7 +254,8 @@ samples: https://github.com/NVIDIA/cuda-samples  (示例， 用来测试)
 关于下载cuda时出现段错误核心转储的问题
 查看用户限制 ulimit -a  发现stack size为8192
 修改栈限制为无限  ulimit -s unlimited  之后便可正常下载
-## 3. 配置系统变量
+
+## 1.3 配置系统变量
 
 ```shell
 # 这三个文件只用选一个添加，这里建议添加到~/.bashrc 或 /etc/profile
@@ -368,7 +273,7 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 source /etc/bash.bashrc  # 更新环境变量
 ```
 
-## 4. 测试CUDA
+## 1.4 测试CUDA
 
 用下载好的`samples`测试
 ```shell
@@ -378,19 +283,19 @@ sudo make
 ./deviceQuery
 ```
 
-# 三. cuDNN
+## 2.1 cuDNN
 
 官网: https://developer.nvidia.com/rdp/cudnn-download
 
 文档: https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
 
-## 1.1 解压
+## 2.2 解压
 
 ```shell
 tar -xf archive.tar.xz
 ```
 
-## 1.2
+## 2.3
 
 ```shell
 cd cudnn<...>
@@ -402,7 +307,7 @@ sudo chmod a+r /usr/local/cuda-11.8/lib64/libcudnn*
 
 
 
-## 2. 查看cuDNN 版本
+## 2.4 查看cuDNN 版本
 
 ```shell
 cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
@@ -444,24 +349,25 @@ sudo -H pip3 install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # 五. Qt
 
-## 1. 网址: 
+## 1.1 网址: 
 
 https://www.qt.io/download-open-source
-
-https://download.qt.io/archive/qt  # 已失效
+![](../../img/enviroment_configure/Ubuntu(Vision)/Qt.png)
 
 ~~https://blog.csdn.net/seedlint/article/details/119853636~~
 
-## 1.1 install
+## 1.2 install
 
 **安装到: /usr/local/Qt**
 
 ```shell
-sudo chmod a+x <filename>.run
+sudo chmod a+x <filename>.run  # 赋予可执行权限
 sudo ./<filename>.run --mirror https://mirrors.tuna.tsinghua.edu.cn/qt # 加代理
 ```
 
-## 1.2 配置环境变量
+开始安装后，首先会显示欢迎信息，并提示需要Qt账号，输入帐号密码后，next，选择自定安装，组件的选择及安装
+
+## 1.3 配置环境变量
 
 ```sh
 vim ~/.bashrc
@@ -631,11 +537,16 @@ error: ld returned 1 exit status
 
 =============================end===============================================	
 
-# 九. yolov3()
+# 九. YOLOV3
 
 官网：https://pjreddie.com/darknet/
-
 安装教程: https://pjreddie.com/darknet/install/
+
+# 十.YOLOV5
+
+官网：https://github.com/ultralytics/yolov5
+相关教程：https://www.bilibili.com/video/BV1G24y1G7qm/?spm_id_from=333.999.0.0
+		          https://space.bilibili.com/389803222?spm_id_from=333.337.search-card.all.click
 
 # 十. anaconda(conda)(python的包管理系统)
 
@@ -822,8 +733,15 @@ sudo apt install fsearch
 
 https://blog.csdn.net/qq_38638132/article/details/105597856 
 
-# 20. flameshot( 截图 )
+# 20. flameshot( 截图软件)
 
-```sh
-sudo apt install flameshot
+网址：https://github.com/flameshot-org/flameshot/releases
+
+只展示我的安装版本
+
+![](../../img/enviroment_configure/Ubuntu(Vision)/flameshot.png)
+
+```markdown
+sudo dpkg -i flameshot-12.1.0-1.ubuntu-20.04.amd64.deb
 ```
+
