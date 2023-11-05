@@ -256,21 +256,34 @@ lsmod | grep nouveau
 
 samples: https://github.com/NVIDIA/cuda-samples  (示例， 用来测试)
 
-## 1.2runfile(ubuntu 20.04)
+## 1.2. CUDA下载(ubuntu 20.04)
+
+### 1.2.1 runfile
 
 跟着官网命令做(选择runfile)
 
 ```shell
-# wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run
-# sudo sh cuda_11.8.0_520.61.05_linux.run
-# sudo bash cuda_10.2.89_440.33.01_linux.run --toolkit --silent --override  # ||
+wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run
+sudo sh cuda_11.8.0_520.61.05_linux.run
+sudo bash cuda_10.2.89_440.33.01_linux.run --toolkit --silent --override  # ||
 ```
 关于下载cuda时出现段错误核心转储的问题
 查看用户限制 ulimit -a  发现stack size为8192
 修改栈限制为无限  ulimit -s unlimited  之后便可正常下载
 
 23.11.5补：
-如果还是出现段错误核心转储的问题，就下载deb包
+
+### 1.2.2 deb包
+
+```sh
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-ubuntu2004-11-8-local_11.8.0-520.61.05-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu2004-11-8-local_11.8.0-520.61.05-1_amd64.deb
+sudo cp /var/cuda-repo-ubuntu2004-11-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cuda
+```
 
 ## 1.3 配置系统变量
 
@@ -300,34 +313,41 @@ sudo make
 ./deviceQuery
 ```
 
-## 2.1 cuDNN
+## 2.1 cuDNN网址
 
 官网: https://developer.nvidia.com/rdp/cudnn-download
 
+安装文档：https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html
+
 文档: https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
 
-## 2.2 解压
+## 2.2 cuDNN下载
+
+### 2.2.1 runfile
 
 ```shell
 tar -xf archive.tar.xz
-```
 
-## 2.3
-
-```shell
 cd cudnn<...>
+# 将以下文件复制到 CUDA 工具包目录中
 sudo cp ./include/cudnn*.h /usr/local/cuda-11.8/include/ 
 sudo cp ./lib64/libcudnn* /usr/local/cuda-11.8/lib64/ 
 sudo chmod a+r /usr/local/cuda-11.8/include/cudnn*.h 
 sudo chmod a+r /usr/local/cuda-11.8/lib64/libcudnn*
+
+cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2 # 查看cuDNN 版本
 ```
 
-
-
-## 2.4 查看cuDNN 版本
+### 2.2.2 deb (下载Debian本地存储库安装包。在发出以下命令之前，您必须将`X.Y`和替换`8.x.x.x`为您的特定 CUDA 和 cuDNN 版本。)
 
 ```shell
-cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
+导航到包含 cuDNN Debian 本地安装程序文件的目录
+sudo dpkg -i cudnn-local-repo-$distro-8.x.x.x_1.0-1_amd64.deb # 启用本地存储库
+sudo cp /var/cudnn-local-repo-*/cudnn-local-*-keyring.gpg /usr/share/keyrings/ # 导入 CUDA GPG 密钥
+sudo apt-get update # 刷新存储库元数据
+sudo apt-get install libcudnn8=8.x.x.x-1+cudaX.Y # 安装运行时库
+sudo apt-get install libcudnn8-dev=8.x.x.x-1+cudaX.Y # 安装开发者库
+sudo apt-get install libcudnn8-samples=8.x.x.x-1+cudaX.Y # 安装代码示例
 ```
 
 # 四. 安装Qt、OpenCV依赖包
@@ -593,11 +613,37 @@ sudo apt install python3-dev python3-pip python3-venv
 
 # 十一. TensorRT(intel)
 
+## 1.网址
+
 官网: https://developer.nvidia.com/tensorrt
 
-安装指导: https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html 
+安装教程: https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html 
 
-选择下载版本时 对应cuda
+## 2.下载安装
+
+### 2.1 deb
+
+[CSDN教程](https://blog.csdn.net/shanglianlm/article/details/130219640?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169917148416800186579747%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=169917148416800186579747&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-130219640-null-null.142^v96^pc_search_result_base9&utm_term=ubuntu20.04%E5%AE%89%E8%A3%85tensorrt%20cuda11.8&spm=1018.2226.3001.4187)(里面也给出了cuda和cudnn的deb包的安装方式)
+
+```sh
+sudo dpkg -i nv-tensorrt-local-repo-${os}-${tag}_1.0-1_amd64.deb
+sudo cp /var/nv-tensorrt-local-repo-${os}-${tag}/*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+# 安装 tensorrt
+sudo apt-get install tensorrt
+# 如果使用 Python
+sudo apt-get install python3-libnvinfer-dev
+# 如果转换 onnx 模型
+sudo apt-get install onnx-graphsurgeon
+# 如果转换 TensorFlow 模型
+sudo apt-get install uff-converter-tf
+# 验证 TensorRT 是否安装成功
+dpkg-query -W tensorrt
+# 您应该看到类似于以下内容的内容：
+tensorrt	8.6.1.6-1+cuda11.8
+```
+
+
 
 下载 -> 解压 -> 配置环境
 
