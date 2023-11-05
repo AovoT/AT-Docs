@@ -204,6 +204,12 @@ lsmod | grep nouveau
 
    Download: https://www.nvidia.cn/Download/index.aspx?lang=cn（根据自己的电脑显卡型号下载合适的驱动）
 
+   ```sh
+   # install 
+   chmod a+x ./NVIDA...
+   sudo ./NVIDIA... -no-x-check -no-nouveau-check -no-opengl-files
+   ```
+
    视频教程https://www.bilibili.com/video/BV1wY411p7mU?p=1&vd_source=d9f539810e996eac76f619a3a7c90193
 
 2. 命令行安装
@@ -229,6 +235,14 @@ lsmod | grep nouveau
    选择你的推荐版本->应用更改，同样可能会出现缺少依赖的错误，缺少什么就sudo apt install 什么
 
    在此给出一个第二种方法和第三种发法的视频教程：https://www.bilibili.com/video/BV1Mg4y1p7uN/?spm_id_from=333.788.top_right_bar_window_history.content.click
+   
+   ```sh
+   dpkg -l | grep nvidia # 查看驱动的版本：
+   sudo apt-get remove --purge nvidia* # 卸载驱动
+   sudo apt remove xserver-xorg-video-nouveau
+   # 若是用第二种和第三种方法安装的NVIDIA驱动，在安装cuda时若出现下面这种报错要用到以上三个命令
+   Failed to initialize NVML: Driver/library version mismatch
+   ```
 
 # 二. CUDA和CUDNN
 
@@ -254,6 +268,9 @@ samples: https://github.com/NVIDIA/cuda-samples  (示例， 用来测试)
 关于下载cuda时出现段错误核心转储的问题
 查看用户限制 ulimit -a  发现stack size为8192
 修改栈限制为无限  ulimit -s unlimited  之后便可正常下载
+
+23.11.5补：
+如果还是出现段错误核心转储的问题，就下载deb包
 
 ## 1.3 配置系统变量
 
