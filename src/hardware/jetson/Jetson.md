@@ -21,6 +21,23 @@ NVIDIA 的 Jetson 系列是一系列高性能嵌入式计算平台，旨在用�
 ## 1.环境烧录
 
 参考  Xavier_NX系统烧录说明手册，位于帮助文档->中文->Jetson烧录与备份
+
+```sh	
+sudo tar -vxf Jetson_Linux_R35.3.1_aarch64.tbz2
+cd Linux_for_Tegra/rootfs/
+sudo tar -jxpf ../../Tegra_Linux_Sample-Root-Filesystem_R35.3.1_aarch64.tbz2 
+cd ../..
+sudo tar -vxf Realtimes_L4T_R35.3.1_rtso-6002_xavier-nx_20230419.tbz2
+cd Realtimes_L4T_R35.3.1_rtso-6002/
+sudo ./install.sh # sudo apt-get install qemu-user-static
+# 使nx进入recovery模式
+lsusb
+cd ../Linux_for_Tegra/
+sudo ./flash.sh rtso-6002e-v1.2 mmcblk0p1 # 对于rtso-***   ls看载板名去掉.conf
+```
+
+
+
 注意事项：1.服务器主机（即你的笔记本电脑）：不限于官方文档给的16.04和18.04，Ubuntu别的系统也可以进行烧录，我用的20.04也可以进行烧录
 				  2.烧录一共需要三个软件包，结合烧录说明手册在官方网站里都可以找到
 				  3.推荐烧录的系统为3531，队库里已经提供，位于AT-Docs/src/hardware/jetson/software_package/System_burning
