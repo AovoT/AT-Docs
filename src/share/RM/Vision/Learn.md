@@ -153,7 +153,9 @@ Bilibili: https://www.bilibili.com/video/BV1ez4y1X7eR/
 
 ## 1.3 弹道解算
 
-Github: https://github.com/CodeAlanqian/SolveTrajectory (该仓库README给出的参考也挺好)
+- https://github.com/RoboMaster/RoboRTS-Tutorial/blob/master/pdf/projectile_model.pdf
+- https://robomaster-oss.github.io/rmoss_tutorials/#/rmoss_core/rmoss_projectile_motion/projectile_motion_iteration
+- https://github.com/CodeAlanqian/SolveTrajectory (该仓库README给出的参考也挺好)
 
 
 
