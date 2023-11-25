@@ -115,6 +115,8 @@ TODO
 
 ### 0.12.1 OpenVINO
 
+Brief: Intel 推出; 一般在NUC(或MinPC, 即CPU为Intel的PC)上使用
+
 官网: https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/overview.html
 
 Docs: https://docs.openvino.ai/2023.2/home.html
@@ -122,6 +124,8 @@ Docs: https://docs.openvino.ai/2023.2/home.html
 Github: https://github.com/openvinotoolkit/openvino
 
 ### 0.12.2 TensorRT
+
+Brief: NVIDIA 推出; 一般在Jetson系列上使用
 
 Github: https://github.com/NVIDIA/
 
