@@ -125,6 +125,18 @@ Github: https://github.com/openvinotoolkit/openvino
 
 Github: https://github.com/NVIDIA/
 
+## 0.13 ROS
+
+Brief: ROS(Robot Operating System),专为机器人软件开发所设计出来的一套电脑操作系统架构
+
+官网： https://wiki.ros.org/Documentation
+
+论坛： https://robotics.stackexchange.com/
+
+Bilibili
+ - https://www.bilibili.com/video/BV1Ci4y1L7ZZ/
+ - https://www.bilibili.com/video/BV1Ub4y1a7PH/
+
 # 数学基础
 
 ## 1.1 线性代数
