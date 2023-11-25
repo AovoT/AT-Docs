@@ -115,6 +115,8 @@ TODO
 
 ### 0.12.1 OpenVINO
 
+Brief: Intel 推出; 一般在NUC(或MinPC, 即CPU为Intel的PC)上使用
+
 官网: https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/overview.html
 
 Docs: https://docs.openvino.ai/2023.2/home.html
@@ -122,6 +124,8 @@ Docs: https://docs.openvino.ai/2023.2/home.html
 Github: https://github.com/openvinotoolkit/openvino
 
 ### 0.12.2 TensorRT
+
+Brief: NVIDIA 推出; 一般在Jetson系列上使用
 
 Github: https://github.com/NVIDIA/
 
@@ -153,7 +157,9 @@ Bilibili: https://www.bilibili.com/video/BV1ez4y1X7eR/
 
 ## 1.3 弹道解算
 
-Github: https://github.com/CodeAlanqian/SolveTrajectory (该仓库README给出的参考也挺好)
+- https://github.com/RoboMaster/RoboRTS-Tutorial/blob/master/pdf/projectile_model.pdf
+- https://robomaster-oss.github.io/rmoss_tutorials/#/rmoss_core/rmoss_projectile_motion/projectile_motion_iteration
+- https://github.com/CodeAlanqian/SolveTrajectory (该仓库README给出的参考也挺好)
 
 
 
