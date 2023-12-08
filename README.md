@@ -9,3 +9,5 @@
 所有文档在: https://github.com/AovoT/AT-Docs/tree/master/src
 
 开始请阅读: https://github.com/AovoT/AT-Docs/blob/master/Docs/start.md
+
+如需引用仓库文档只**需表明出处链接**即可

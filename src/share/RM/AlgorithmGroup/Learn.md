@@ -55,11 +55,13 @@ Brief: 矩阵运算库
 
 Docs: https://eigen.tuxfamily.org/index.php
 
-## 0.5 异步
+## 0.5 并发 & 并行 & 异步 
 
 ### 0.5.1 多线程
 
 Bilibili: https://www.bilibili.com/video/BV1Ya411q7y4/
+
+Book: 《C++并发编程实战(第2版)》
 
 ### 0.5.2 进程
 
@@ -115,7 +117,7 @@ TODO
 
 ### 0.12.1 OpenVINO
 
-Brief: Intel 推出; 一般在NUC(或MinPC, 即CPU为Intel的PC)上使用
+Brief: Intel 推出; 一般在NUC(或MinPC, 即CPU为Intel系列, GPU弱的PC)上使用
 
 官网: https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/overview.html
 

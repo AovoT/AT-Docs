@@ -6,6 +6,8 @@ project(projectname)  # 设置项目名称
 
 set(CMAKE_CXX_STANDARD 17)  # 设置cpp标准
 set(CMAKE_INCLUDE_CURRENT_DIR ON)  # 设置头文件搜索时包含当前目录
+set(CMAKE_CXX_STANDARD_REQUIRED ON) # 项目需要特定的C++标准，并且应该强制执行
+set(CMAKE_CXX_EXTENSIONS OFF) # 关闭编译器特定的扩展, 确保项目不依赖于任何特定编译器提供的非标准功能或扩展
 
 # Qt依赖设置
 set(CMAKE_AUTOUIC ON)
@@ -23,11 +25,11 @@ endif ()
 # 添加宏
 add_definitions(-DDEBUG_SHOW -DDEBUG_YX)
 
-# package
+# sources
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS src/*.cpp src/*.h)
 # 生成 可执行文件
 add_executable(${PROJECT_NAME} ${sources})
- # 生成 静态库文件
+# 生成 静态库文件
 add_library(${PROJECT_NAME} STATIC source.cpp include.h) 
 # 设置include目录
 target_include_directories(IntelligentHanding PUBLIC include)
