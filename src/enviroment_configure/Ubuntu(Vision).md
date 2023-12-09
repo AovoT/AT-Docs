@@ -7,15 +7,17 @@
 1. 制作系统盘
    硬件需要一个u盘和一台电脑，软件需要Rufus(官方推荐烧录软件)和所要制作的Ubuntu版本镜像
 
-   (镜像下载地址): https://ubuntu.com/download/desktop 统一下载20.04的版本
+   (镜像下载地址): 统一下载20.04的版本
+   - https://releases.ubuntu.com/focal/ (20.04)
+   - https://ubuntu.com/download/desktop
 
    (制作Ubuntu启动u盘): [https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#1-overview](#1-overview)
 
-   注意事项：如果发现自己制作的启动盘，在BIOS界面不显示，可能是自己U盘的问题，如果要购买U盘，提前问好商家是否可以制作启动盘。
+   注意事项：**需要U盘支持被制作为启动盘** (否则可能会无法被检测到)
    
 2. 预留磁盘空间给Ubuntu,第一次装都装120G,后期重装自己看情况给
 
-   点击磁盘管理,选择一个内存富裕的分区 ，右击 ->“压缩卷,要注意内存在磁盘上需要是连续的，即最好只从一个盘腾地方,压缩完成之后，在你选择压缩的分区上的图形化显示会出现灰色条，即证明成功
+   点击磁盘管理,选择一个存储空间富裕的分区 ，右击 ->“压缩卷,要注意内存在磁盘上需要是连续的，即最好只从一个盘腾地方,压缩完成之后，在你选择压缩的分区上的图形化显示会出现灰色条，即证明成功
 
    ![](../../img/enviroment_configure/Ubuntu(Vision)/图片1.png)
 
@@ -87,8 +89,6 @@
 
 https://blog.csdn.net/qq_25014669/article/details/104651894?spm=1001.2014.3001.5501
 
-
-
 ---
 
 简单介绍
@@ -132,11 +132,13 @@ sudo hwclock --localtime --systohc
 # 四.Typora安装
 
 ```sh
+######## 解压方式根据文件类型自行修改命 #######
 # install rar unrar
 sudo apt install rar unrar
 # unrar
 mkdir typora
 unrar e typora1.2.4\ Linux.rar -d typora
+############## end #######################
 # install
 sudo dpkg -i typora_1.2.4_amd64.deb
 # replace asar
@@ -169,7 +171,7 @@ sudo apt install -y \
 sudo vim /etc/modprobe.d/blacklist.conf
 ```
 
-在打开的blacklist.conf末尾添加如下，保存文本关闭
+在打开的 `blacklist.conf` 末尾添加如下，保存文本关闭
 
 ```properties
 blacklist nouveau
@@ -202,7 +204,9 @@ lsmod | grep nouveau
 
    官网: https://www.nvidia.cn/
 
-   Download: https://www.nvidia.cn/Download/index.aspx?lang=cn（根据自己的电脑显卡型号下载合适的驱动）
+   Download: https://www.nvidia.cn/Download/index.aspx?lang=cn
+
+   (根据自己的电脑显卡型号下载合适的驱动)
 
    ```sh
    # install 
@@ -210,34 +214,34 @@ lsmod | grep nouveau
    sudo ./NVIDIA... -no-x-check -no-nouveau-check -no-opengl-files
    ```
 
-   视频教程https://www.bilibili.com/video/BV1wY411p7mU?p=1&vd_source=d9f539810e996eac76f619a3a7c90193
+   视频教程: https://www.bilibili.com/video/BV1wY411p7mU/
 
 2. 命令行安装
 
-   ```markdown
-   ubuntu-drivers devices #首先在终端输入这条命令查看适合驱动
-   查看recommended版本，比如我这里为535 #看你自己的推荐版本是什么
+   ```shell
+   ubuntu-drivers devices  # 首先在终端输入这条命令查看适合驱动
+   # 查看recommended版本，比如我这里为535看你自己的推荐版本是什么
    ```
 
    ![](../../img/enviroment_configure/Ubuntu(Vision)/nvidia驱动.png)
 
-   ```markdown
-   之后安装推荐驱动的server版本，箭头所指
-   即执行sudo apt install nvidia-driver-535-server
+   ```shell
+   # 之后安装推荐驱动，箭头所指
+   sudo apt install nvidia-driver-535-server
    ```
 
-   之后可能会出现报缺少依赖的错误，缺什么就sudo apt install 什么，安装完依赖后再次执行安装驱动的命令
+   之后可能会出现报缺少依赖的错误，缺什么就 `sudo apt install` 什么，安装完依赖后再次执行安装驱动的命令
 
 3. ubuntu的UI界面中安装
    打开转件和更新
    ![](../../img/enviroment_configure/Ubuntu(Vision)/nvidia驱动_1.png)
 
-   选择你的推荐版本->应用更改，同样可能会出现缺少依赖的错误，缺少什么就sudo apt install 什么
+   选择你的推荐版本->应用更改，同样可能会出现缺少依赖的错误，缺少什么就 sudo apt install 什么
 
    在此给出一个第二种方法和第三种发法的视频教程：https://www.bilibili.com/video/BV1Mg4y1p7uN/?spm_id_from=333.788.top_right_bar_window_history.content.click
    
    ```sh
-   dpkg -l | grep nvidia # 查看驱动的版本：
+   dpkg -l | grep nvidia # 查看驱动的版本
    sudo apt-get remove --purge nvidia* # 卸载驱动
    sudo apt remove xserver-xorg-video-nouveau
    # 若是用第二种和第三种方法安装的NVIDIA驱动，在安装cuda时若出现下面这种报错要用到以上三个命令
@@ -288,9 +292,10 @@ sudo apt-get -y install cuda
 ## 1.3 配置系统变量
 
 ```shell
-# 这三个文件只用选一个添加，这里建议添加到~/.bashrc 或 /etc/profile
+# 这三个文件只用选一个添加，这里建议添加到~/.bashrc 或 /etc/profile 
+# 或 在 /etc/profile.d/ 目录下单独新建 *.sh文件
+vim ~/.bashrc
 sudo vim /etc/profile
-sudo vim ~/.bashrc
 sudo vim /etc/bash.bashrc
 # vim 不熟练就用gedit
 
@@ -492,7 +497,7 @@ sudo udevadm control --reload-rules && udevadm trigger
 mkdir build && cd build
 ```
 
-2>. 运行 CMake：
+2>. 运行 CMake： 
 
 cmake ../- 默认构建设置为在调试模式下生成核心共享对象和单元测试二进制文件。用于-DCMAKE_BUILD_TYPE=Release构建优化。
 
@@ -539,24 +544,19 @@ CSDN网址: https://blog.csdn.net/qq_25014669/article/details/104651894
 ## 8.1 spdlog
 
 ```shell
-# 解压
-# 或从 github 上下载
-git clone https://github.com/gabime/spdlog
-
-# 编译安装
-cmake -B build && cmake --build && sudo cmake --build build --target install
-sudo vim /etc/profile # 配置环境变量
+git clone https://github.com/gabime/spdlog --depth=1
+cmake -B build && cmake --build build -j$(nproc) && sudo cmake --build build --target install
 ```
 
 ## 8.2 KdRobotCppLibs
 ```shell
-# 解压
-
-# 编译安装
+git clone https://github.com/LX050724/KdrobotCppLibs.git --depth=1
 cmake -B build && cmake --build && sudo cmake --build build --target install
 ```
 
 ```properties
+# 配置环境变量
+sudo vim /etc/profile
 # kdrobotcpplibs
 export KDROBOT_CPP_LIBS_HOME=/usr/local/KdrobotCppLibs
 export PATH=${KDROBOT_CPP_LIBS_HOME}/bin${PATH:+:${PATH}}
@@ -564,30 +564,23 @@ export PATH=${KDROBOT_CPP_LIBS_HOME}/bin/Realsense${PATH:+:${PATH}}
 export CMAKE_PREFIX_PATH=${KDROBOT_CPP_LIBS_HOME}/lib/cmake${CMAKE_PREFIX_PATH:+:${CMAKE_PREFIX_PATH}}
 ```
 
-=================================================================================
-
-安装队内库时报错：
-
-error: ld returned 1 exit status
-
-肯定是环境变量没配号
-
-=============================end===============================================	
-
 # 九. YOLOV3
 
 官网：https://pjreddie.com/darknet/
+
 安装教程: https://pjreddie.com/darknet/install/
 
 # 十.YOLOV5
 
 官网：https://github.com/ultralytics/yolov5
+
 相关教程：https://www.bilibili.com/video/BV1G24y1G7qm/?spm_id_from=333.999.0.0
 		          https://space.bilibili.com/389803222?spm_id_from=333.337.search-card.all.click
 
 # 十. anaconda(conda)(python的包管理系统)
 
-1. 官网 https://www.anaconda.com/ 
+1. 官网 https://www.anaconda.com/
+
 2. .sh文件执行
 
   ```sh
@@ -600,8 +593,7 @@ sh filename.sh    # 2.
 chmod a+x filename.sh  # 3.
 ./filename.sh
   ```
-查看Anaconda中创建的虚拟环境列表，可以使用以下命令：
-conda info --envs
+查看Anaconda中创建的虚拟环境列表，可以使用以下命令：`conda info --envs`
 
 
 (另附: ) 关于Python环境的搭建:
