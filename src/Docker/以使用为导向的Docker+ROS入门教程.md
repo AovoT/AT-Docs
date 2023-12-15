@@ -29,7 +29,32 @@ docker run hello-world
 
 该条命令会运行`hello-world`镜像，会先检查系统中是否存在该镜像：若不存在，则拉取公共镜像。
 
-成功后会返回以下信息
+但一般此时不会成功，而是会返回没有没有权限运行之类的报错。这是因为
+
+> 默认情况下， docker 命令会使用 Unix socket 与 Docker 引擎通讯。 而只有 root 用户和docker 组的用户才可以访问 Docker 引擎的Unix socket。 （可以参考：Docker架构及组件剖析）
+>
+> docker 组内用户执行命令的时候会自动在所有命令前添加 sudo。因为设计或者其他的原因，Docker 给予所有 docker 组的用户相当大的权力（虽然权力只体现在能访问 /var/run/docker.sock 上面）。
+>
+> 默认情况下，Docker 软件包是会默认添加一个 docker 用户组的。Docker 守护进程会允许 root 用户和 docker组用户访问 Docker。
+> 
+> 出于安全考虑，一般 Linux 系统上不会直接使用 root 用户。  因此，更好地做法是将需要使用 docker 的用户加入 docker用户组。
+
+此时需要在终端中进行如下操作
+
+```bash
+# 创建docker组（已经存在则不用创建），如果出现重复创建的报错，不用管，继续下一步
+sudo groupadd docker
+# 添加当前用户到docker组
+sudo gpasswd -a ${USER} docker
+# 重启 docker服务
+sudo systemctl restart docker 
+# 切换到docker组
+newgrp docker
+```
+
+之后再继续进行测试命令就可以啦~
+
+测试成功后会返回以下信息
 
 ```bash
 Hello from Docker!
