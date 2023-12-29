@@ -56,8 +56,11 @@ sudo ./flash.sh rtso-6002e-v1.2 mmcblk0p1 # 对于rtso-***   ls看载板名去�
 sudo parted /dev/mmcblk1 mklabel gpt
 sudo parted /dev/mmcblk1 mkpart primary 0GB 115GB
 sudo mkfs.ext4 /dev/mmcblk1p1
+# 如果从U盘下载，则将下一句替换为  sudo dd if =/U盘名称/img/6002emmc.img.raw of=/dev/mmcblk1p1 bs=1M
 sudo dd if=/dev/mmcblk0p1 of=/dev/mmcblk1p1 bs=1M
+
 sudo fsck /dev/mmcblk1p1
+
 sudo resize2fs /dev/mmcblk1p1
 sudo blkid /dev/mmcblk1p1 # 查看分区的 PARTUUID 值
 
