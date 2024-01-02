@@ -574,8 +574,7 @@ export CMAKE_PREFIX_PATH=${KDROBOT_CPP_LIBS_HOME}/lib/cmake${CMAKE_PREFIX_PATH:+
 
 官网：https://github.com/ultralytics/yolov5
 
-相关教程：https://www.bilibili.com/video/BV1G24y1G7qm/?spm_id_from=333.999.0.0
-		          https://space.bilibili.com/389803222?spm_id_from=333.337.search-card.all.click
+相关教程：https://www.bilibili.com/video/BV1G24y1G7qm
 
 # 十. anaconda(conda)(python的包管理系统)
 
@@ -603,7 +602,7 @@ sudo apt update
 sudo apt install python3-dev python3-pip python3-venv
 ```
 
-# 十一. TensorRT(intel)
+# 十一. TensorRT(NVIDIA)
 
 ## 1.网址
 
@@ -659,8 +658,8 @@ conda activate pytorch
 ```sh
 python
 import torch
-print(torch.__version__)  来查看pytorch版本
-torch.cuda.is_available()  若返回True则说明 PyTorch 支持 CUDA 并且 CUDA 已正确配置。如果返回 False，则意味着 CUDA 配置可能存在问题。
+print(torch.__version__)  # 查看pytorch版本
+torch.cuda.is_available()  # 若返回True则说明 PyTorch 支持 CUDA 并且 CUDA 已正确配置。如果返回 False，则意味着 CUDA 配置可能存在问题。
 ```
 
 ## 12.2 Yolov5

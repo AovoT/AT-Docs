@@ -29,15 +29,16 @@ cv::Mat a = Mat_<double>(3, 3);  // 声明指定类型
 cv::Mat::Mat();  // 默认, 会在后续自动判断类型、大小，用于存储读取的图像数据、函数输出结果
 cv::Mat::Mat(int rows, int cols, int type);  // 行 列  数据类型CV_8UC3
 cv::Mat::Mat(Size size(), int type);  // 二维数组变量尺寸 Size(cols, rows);
-cv::Mat::Mat(const Mat & m);  // 利用已有Mat。只是复制了矩阵头，改变其中一个另一个也会改变
-cv::Mat::Mat(const Mat & m, const Range & rowRange, const Range & colRange);  // 构造已有Mat类的子类
 /**
  * m: 已经构建完成的Mat矩阵
  * rowRange: Range(2, 5)第2行到第5行 
  * colRange: Range(2, 5)第2列到第5列
  *
  * 指向的数据仍一致(?)
-**/
+ */
+cv::Mat::Mat(const Mat & m);  // 利用已有Mat。只是复制了矩阵头，改变其中一个另一个也会改变
+cv::Mat::Mat(const Mat & m, const Range & rowRange, const Range & colRange);  // 构造已有Mat类的子类
+
 // 对Mat图像切片
 inline
 Mat Mat::operator()( const Rect& roi ) const
@@ -53,13 +54,14 @@ Size(cols, rows);
 ###      	 	1.1.2 赋值
 
 ```c++
-cv::Mat::Mat(int rows, int cols, int type, const Scalar & s);  // 构造并赋值
 /**
  * rows: 行y
  * cols: 列x
  * type: 数据类型
  * s: 每个像素赋值的参数变量 如: Scalar(0, 0, 255)
 **/
+cv::Mat::Mat(int rows, int cols, int type, const Scalar & s);  // 构造并赋值
+
 cv::Mat a = (cv::Mat_<int>(3, 3) << 1, 2, 3, 4, 5, 6, 7, 8, 9);  // 枚举法赋值
 // 循环法
 cv::Mat b = cv::Mat_<int>(3, 3);
@@ -145,13 +147,13 @@ for (int i = 0; it != it_end; i++)
 ###       		1.2.1 imread
 
 ```c++
-cv::Mat cv::imread(const String & filename, int flags=IMREAD_COLOR);  // 读取图像
 /**
  * filename: 文件名
  * flags: 标志.  默认值为按彩图读取 P38            
  * 当文件打开失败 返回空矩阵
- * 
  */
+cv::Mat cv::imread(const String & filename, int flags=IMREAD_COLOR);  // 读取图像
+
 a.data 数据
 a.empty();  // 是否为空，空为True
 ```
@@ -179,12 +181,13 @@ void cv::imshow(const String & winname, InputArray mat);  // 显示图像
 ###       		1.3.1视频数据读取
 
 ```c++
-cv::VideoCapture::VideoCapture();  // 默认构造, 之后需要调用 open();
-cv::VideoCapture::VideoCapture(const String & filename, int apiPreference = CAP_ANY);  // 
 /**
  * filename: 视频文件、图像序列(%02d.jpg)、URL 
  * apiPreference: 设置的属性, 如: 编码，是否调用OpenNI....
  **/
+cv::VideoCapture::VideoCapture();  // 默认构造, 之后需要调用 open();
+cv::VideoCapture::VideoCapture(const String & filename, int apiPreference = CAP_ANY);  // 
+
 处理视频内容时仍需 >> Mat
 while (1)
 {
