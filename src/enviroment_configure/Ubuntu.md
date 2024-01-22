@@ -807,3 +807,11 @@ https://blog.csdn.net/qq_38638132/article/details/105597856
 sudo dpkg -i flameshot-12.1.0-1.ubuntu-20.04.amd64.deb
 ```
 
+# 21 视频播放软件vlc安装
+
+```sh
+sudo add-apt-repository ppa:videolan/master-daily
+sudo apt-get update
+sudo apt-get install vlc # 缺什么依赖安什么依赖
+```
+
