@@ -22,6 +22,7 @@
   - TensorFlow
   - ...
 - [视觉学习路线(部分偏向RM)](https://github.com/AovoT/AT-Docs/blob/master/src/share/RM/AlgorithmGroup/Learn.md)
+- [相机、IMU 标定](https://github.com/AovoT/AT-Docs/tree/master/src/calibrate)
 - [CMake简单示例](https://github.com/AovoT/AT-Docs/blob/master/src/GNU-Compiler/CMake.md)
 - [git入门](https://github.com/AovoT/AT-Docs/blob/master/src/git)
 - [Docker入门](https://github.com/AovoT/AT-Docs/blob/master/src/Docker/%E4%BB%A5%E4%BD%BF%E7%94%A8%E4%B8%BA%E5%AF%BC%E5%90%91%E7%9A%84Docker%2BROS%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B.md)
