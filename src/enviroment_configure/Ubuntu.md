@@ -407,6 +407,13 @@ sudo chmod a+x <filename>.run  # 赋予可执行权限
 sudo ./<filename>.run --mirror https://mirrors.tuna.tsinghua.edu.cn/qt # 加代理
 ```
 
+其他镜像
+- 阿里云: https://mirrors.aliyun.com/qt/
+- 清华大学：https://mirrors.tuna.tsinghua.edu.cn/qt/
+- 中国科学技术大学：http://mirrors.ustc.edu.cn/qtproject/
+- 北京理工大学：http://mirror.bit.edu.cn/qtproject/
+- 中国互联网络信息中心：https://mirrors.cnnic.cn/qt/
+
 开始安装后，首先会显示欢迎信息，并提示需要Qt账号，输入帐号密码后，next，选择自定安装，组件的选择及安装
 
 ## 1.3 配置环境变量
@@ -564,17 +571,11 @@ export PATH=${KDROBOT_CPP_LIBS_HOME}/bin/Realsense${PATH:+:${PATH}}
 export CMAKE_PREFIX_PATH=${KDROBOT_CPP_LIBS_HOME}/lib/cmake${CMAKE_PREFIX_PATH:+:${CMAKE_PREFIX_PATH}}
 ```
 
-# 九. YOLOV3
+# ~~九. YOLOV3~~
 
 官网：https://pjreddie.com/darknet/
 
 安装教程: https://pjreddie.com/darknet/install/
-
-# 十.YOLOV5
-
-官网：https://github.com/ultralytics/yolov5
-
-相关教程：https://www.bilibili.com/video/BV1G24y1G7qm
 
 # 十. anaconda(conda)(python的包管理系统)
 
@@ -592,6 +593,7 @@ sh filename.sh    # 2.
 chmod a+x filename.sh  # 3.
 ./filename.sh
   ```
+
 查看Anaconda中创建的虚拟环境列表，可以使用以下命令：`conda info --envs`
 
 
@@ -602,50 +604,7 @@ sudo apt update
 sudo apt install python3-dev python3-pip python3-venv
 ```
 
-# 十一. TensorRT(NVIDIA)
-
-## 1.网址
-
-官网: https://developer.nvidia.com/tensorrt
-
-安装教程: https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html 
-
-## 2.下载安装
-
-### 2.1 deb
-
-[CSDN教程](https://blog.csdn.net/shanglianlm/article/details/130219640?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169917148416800186579747%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=169917148416800186579747&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-130219640-null-null.142^v96^pc_search_result_base9&utm_term=ubuntu20.04%E5%AE%89%E8%A3%85tensorrt%20cuda11.8&spm=1018.2226.3001.4187)(里面也给出了cuda和cudnn的deb包的安装方式)
-
-```sh
-sudo dpkg -i nv-tensorrt-local-repo-${os}-${tag}_1.0-1_amd64.deb
-sudo cp /var/nv-tensorrt-local-repo-${os}-${tag}/*-keyring.gpg /usr/share/keyrings/
-sudo apt-get update
-# 安装 tensorrt
-sudo apt-get install tensorrt
-# 如果使用 Python
-sudo apt-get install python3-libnvinfer-dev
-# 如果转换 onnx 模型
-sudo apt-get install onnx-graphsurgeon
-# 如果转换 TensorFlow 模型
-sudo apt-get install uff-converter-tf
-# 验证 TensorRT 是否安装成功
-dpkg-query -W tensorrt
-# 您应该看到类似于以下内容的内容：
-tensorrt	8.6.1.6-1+cuda11.8
-```
-
-
-
-下载 -> 解压 -> 配置环境
-
-```sh
-# TensorRT
-export TENSORRT_HOME=/usr/local/TensorRT-8.6.1.6
-export PATH=${TENSORRT_HOME}/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=${TENSORRT_HOME}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-```
-
-# 十二. Pytorch(依赖anaconda)
+# 十一. Pytorch
 
 官网：https://pytorch.org/get-started/locally/
 
@@ -662,19 +621,27 @@ print(torch.__version__)  # 查看pytorch版本
 torch.cuda.is_available()  # 若返回True则说明 PyTorch 支持 CUDA 并且 CUDA 已正确配置。如果返回 False，则意味着 CUDA 配置可能存在问题。
 ```
 
-## 12.2 Yolov5
+## 11.2 Yolov5
 
 官网: https://pytorch.org/hub/ultralytics_yolov5/
 
-https://docs.ultralytics.com/yolov5/tutorials/pytorch_hub_model_loading/
+相关教程：
+
+- https://www.bilibili.com/video/BV1G24y1G7qm
+
+- en: https://docs.ultralytics.com/
+- cn: https://docs.ultralytics.com/zh/
 
 ```sh
+##########################
+# 注意: Yolov5依赖pytorch #
+##########################
 conda create --name yolov5 python=3.9 -y
 conda activate yolov5
 pip install -U ultralytics
 ```
 
-# 十三. TensorFlow(依赖anaconda): 
+# 十二. TensorFlow: 
 
 官网: https://www.tensorflow.org/install/pip 
 
@@ -713,7 +680,48 @@ https://zhuanlan.zhihu.com/p/371239130
 https://zhuanlan.zhihu.com/p/297002406
 */
 
-# ~~十四. deep-wine(跳过)~~
+# 十三. TensorRT(NVIDIA)
+
+## 1.网址
+
+官网: https://developer.nvidia.com/tensorrt
+
+安装教程: https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html 
+
+## 2.下载安装
+
+### 2.1 deb
+
+[CSDN教程](https://blog.csdn.net/shanglianlm/article/details/130219640?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169917148416800186579747%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=169917148416800186579747&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-130219640-null-null.142^v96^pc_search_result_base9&utm_term=ubuntu20.04%E5%AE%89%E8%A3%85tensorrt%20cuda11.8&spm=1018.2226.3001.4187)(里面也给出了cuda和cudnn的deb包的安装方式)
+
+```sh
+sudo dpkg -i nv-tensorrt-local-repo-${os}-${tag}_1.0-1_amd64.deb
+sudo cp /var/nv-tensorrt-local-repo-${os}-${tag}/*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+# 安装 tensorrt
+sudo apt-get install tensorrt
+# 如果使用 Python
+sudo apt-get install python3-libnvinfer-dev
+# 如果转换 onnx 模型
+sudo apt-get install onnx-graphsurgeon
+# 如果转换 TensorFlow 模型
+sudo apt-get install uff-converter-tf
+# 验证 TensorRT 是否安装成功
+dpkg-query -W tensorrt
+# 您应该看到类似于以下内容的内容：
+tensorrt	8.6.1.6-1+cuda11.8
+```
+
+下载 -> 解压 -> 配置环境
+
+```sh
+# TensorRT
+export TENSORRT_HOME=/usr/local/TensorRT-8.6.1.6
+export PATH=${TENSORRT_HOME}/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=${TENSORRT_HOME}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+```
+
+# ~~十四. deep-wine~~
 
 1. 卸载原来的depp-wine
 sudo apt remove *deepin*wine* udis86
@@ -783,7 +791,7 @@ git clone https://github.com/cboxdoerfer/fsearch.git  #
 sudo apt install fsearch
 ```
 
-# 十九. C++执行python(Clion)
+# ~~十九. C++执行python(Clion)~~
 
 https://blog.csdn.net/qq_38638132/article/details/105597856 
 

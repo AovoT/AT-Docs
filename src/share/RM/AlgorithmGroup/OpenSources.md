@@ -18,7 +18,7 @@ rm_auto_aim(chenjunn): https://github.com/chenjunnn/rm_auto_aim
 
 YolovX-Face -- OpenVINO 装甲板四点检测 (iGPU): https://github.com/Derkai52/YolovX-face-armor-detect
 
-## 2. 追踪器
+## 2. KF
 
 kF && EKF Book: https://www.kalmanfilter.net/default.aspx
 
@@ -57,3 +57,12 @@ rm-controls: https://github.com/rm-controls
 rm-controls-docs: https://rm-control-docs.netlify.app/
 
 Ossian: https://github.com/StephanXu/Ossian
+
+## 附录
+带标签的数据集: https://pan.baidu.com/s/1x9vJaqYfG7TQXQBtosenuA?pwd=RMCV
+
+装甲板(能量机关)自动标注工具:
+
+- 上交: https://github.com/xinyang-go/LabelRoboMaster (装甲板四点模型)
+
+- https://github.com/MonthMoonBird/LabelRoboMaster (装甲板四点模型、能量机关五点模型、能量机关四点模型)

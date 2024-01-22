@@ -89,7 +89,7 @@ sudo systemctl status myservice.service  # 查看状态
 
 ## 5. lsb_release 显示当前Linux发行版
 
-用于显示当前Linux发行版的信息，包括发行版名称、版本号和发行日期等信息。可以在终端中输入以下命令查看当前系统的LSB版本：
+用于显示当前Linux发行版的信息，包括发行版名称、版本号和发行日期等信息。可以在终端中输入以下命令查看当前系统的LSB版本:
 
 ```shell
 lsb_release -a
@@ -274,7 +274,7 @@ echo "" | sudo tee /etc/apt/sources.list
 
 ## 14. 用户管理
 
-14.1 ### 创建新用户
+### 14.1 创建新用户
 
 ```shell
 useradd -d /home/new_user -m sam -s /bin/bash -g new_user_group -G adm,root -c "注释"
@@ -283,7 +283,7 @@ passwd new_user
 chown -R new_user:new_user /home/new_user
 ```
 
-14.2 ### 用户具有 sudo 权限
+### 14.2 用户具有 sudo 权限
 
 ```shell
 sudo visudo
@@ -291,12 +291,14 @@ sudo visudo
 new_user ALL=(ALL:ALL) ALL
 ```
 
-14.3 ### 新用户加入sudo adm组
+### 14.3 新用户加入sudo adm组
 
 ```shell
 sudo usermod -aG sudo new_user
 sudo usermod -aG adm new_user
 ```
+
+
 
 # 四. 执行.exe文件
 
