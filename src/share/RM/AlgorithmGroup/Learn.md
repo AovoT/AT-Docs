@@ -81,6 +81,18 @@ Docs:
 
 Books: 《Python基础教程》
 
+## 0.7.1 Anaconda
+
+Brief: 使**`Python`环境管理**更简单, 便利科学计算、机器学习、数据分析
+
+官网 https://www.anaconda.com/
+
+## 0.7.2 Poetry
+
+Brief: Python 项目的依赖管理和打包工具, 旨在简化 Python 项目的依赖管理、版本控制和打包等任务
+
+官网: https://python-poetry.org/
+
 ## 0.8 `numpy`
 
 Brief: 科学计算库; (多维数组和矩阵计算)
@@ -109,7 +121,7 @@ Bilibili
 
 官网: https://pytorch.org/
 
-#### 0.11.2 TensorFlow
+### 0.11.2 TensorFlow
 
 TODO
 
@@ -142,6 +154,12 @@ Brief: ROS(Robot Operating System),专为机器人软件开发所设计出来的
 Bilibili
  - https://www.bilibili.com/video/BV1Ci4y1L7ZZ/
  - https://www.bilibili.com/video/BV1Ub4y1a7PH/
+
+## 0.14 SLAM
+
+### 0.14.1 视觉SLAM
+
+Book: 《视觉SLAM十四讲》
 
 # 数学基础
 
