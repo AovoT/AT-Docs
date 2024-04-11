@@ -85,15 +85,15 @@ target_link_libraries(${PROJECT_NAME}  ${OpenCV_LIBS}
                                         ${ngraph_LIBRARIES})
 ```
 
-## 四.示例代码(此示例代码是基于InferenceEngin写的)
+## 四.示例代码(基于InferenceEngin)
 
 ```c++
 #include <openvino/openvino.hpp>
 #include <opencv2/opencv.hpp>
-#include<inference_engine.hpp>
+#include <inference_engine.hpp>
 #include <fstream>
 #include <iostream>
-#include<ctime>
+#include <ctime>
 using namespace std;
 using namespace cv;
 using namespace InferenceEngine;
@@ -101,7 +101,7 @@ string model_path = "";
 string image_path = "";
 Blob::Ptr warpMat2Blob(Mat &image);
 int main() {
-        // 初始化Inference Engine
+    // 初始化Inference Engine
     Core ie;
 
     // 加载网络
@@ -173,7 +173,7 @@ Blob::Ptr warpMat2Blob(Mat &image) {
     //注意  以下根据不同模型不同的输入数据形式进行不同的修改(借鉴开源时，可以先打印出模型输入输出数据的形式，然后更改)
     TensorDesc tensorDesc(Precision::U8, {1, channels, height, width}, Layout::NHWC);
     Blob::Ptr blob = make_shared_blob<uint8_t>(tensorDesc, out_image.data);
-    // 根据不同版本的openvion以上两行代码可报错  因为  在 有些Opesudo nVINO版本中，确实没有提供名为 make_shared_blob 的函数，一下为不同版本的通用写法(建议使用这个写法，增加容错)
+    // 根据不同版本的openvion以上两行代码可报错  因为在有些openvino版本中，确实没有提供名为 make_shared_blob 的函数，以下为不同版本的通用写法(建议使用这个写法，增加容错)
     TensorDesc tensorDesc(Precision::FP32, {1, height, width, channels}, Layout::NHWC);
     Blob::Ptr blob = make_shared_blob<float>(tensorDesc);
     blob->allocate();
@@ -183,15 +183,15 @@ Blob::Ptr warpMat2Blob(Mat &image) {
 }
 ```
 
-## 五.示例代码(基于ov库的示例代码)
+## 五.示例代码(基于ov库)
 
 ```c++
 #include <openvino/openvino.hpp>
 #include <opencv2/opencv.hpp>
-#include<inference_engine.hpp>
+#include <inference_engine.hpp>
 #include <fstream>
 #include <iostream>
-#include<ctime>
+#include <ctime>
 int main() {
     ov::Core core;
 
