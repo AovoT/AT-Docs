@@ -102,9 +102,17 @@ string model_path = "";
 string image_path = "";
 Blob::Ptr warpMat2Blob(Mat &image);
 int main() {
-        // 初始化Inference Engine
+    // 初始化Inference Engine
     Core ie;
-
+    
+    //获取可用设备
+    InferenceEngine::Core ie;
+    auto devices = ie.get_available_devices();
+    for (auto& device : devices) {
+        std::cout << device << "  ";
+    }
+    std::cout << std::endl;
+    
     // 加载网络
     auto network = ie.ReadNetwork(model_path);
 
@@ -178,7 +186,13 @@ Blob::Ptr warpMat2Blob(Mat &image) {
 #include <inference_engine.hpp>
 int main() {
     ov::Core core;
-
+    //获取可用设备
+    auto devices = core.get_available_devices();
+    for (auto& device : devices) {
+        std::cout << device << "  ";
+    }
+    std::cout << std::endl;
+    
     ov::CompiledModel compiled_model = core.compile_model("Model_path", "Device"); //加载模型
 
     auto model_info = core.read_model("Model_path"); // 获取模型信息(可以获得模型的输入和输出数据形式以及名字)
