@@ -78,7 +78,7 @@ target_link_libraries(${PROJECT_NAME} openvino::runtime)
                           
 ```
 
-## 四.示例代码(此示例代码是基于InferenceEngin写的)
+## 四.示例代码(用于查看GPU是否配置成功)
 
 ```
 #include <iostream>
