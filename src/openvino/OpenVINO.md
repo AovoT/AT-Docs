@@ -67,33 +67,34 @@ apt-get update && apt-get install -y --no-install-recommends intel-opencl-icd in
 ```cmake
 cmake_minimum_required(VERSION 3.17)
 project(openvino)
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS src/*.cpp include/*.h)
+add_executable(${PROJECT_NAME}  ${sources})
 
 find_package(OpenCV REQUIRED)
 find_package(OpenVINO REQUIRED) # 必须放在find_package(InferenceEngine REQUIRED)find_package(ngraph REQUIRED)前面
 find_package(InferenceEngine REQUIRED)
 find_package(ngraph REQUIRED)
 
-add_library(${PROJECT_NAME}  src/openvino_ov.cpp src/openvino.cpp include/openvino.h)
-
 target_include_directories(${PROJECT_NAME} PUBLIC ${InferenceEngine_INCLUDE_DIRS})
-target_include_directories(${PROJECT_NAME} PUBLIC ${ngraph_INCLUDE_DIRS})
 target_include_directories(${PROJECT_NAME} PUBLIC include/)
 
 target_link_libraries(${PROJECT_NAME}  ${OpenCV_LIBS} 
                                         ${OpenVINO_LIBRARIES}
                                         ${InferenceEngine_LIBRARIES}
-                                        ${ngraph_LIBRARIES})
+                                        ${NGRAPH_LIBRARIES})
 ```
 
 ## 四.示例代码(此示例代码是基于InferenceEngin写的)
 
 ```c++
+#include <iostream>
+#include <fstream>
+#include <ctime>
+
 #include <openvino/openvino.hpp>
 #include <opencv2/opencv.hpp>
-#include<inference_engine.hpp>
-#include <fstream>
-#include <iostream>
-#include<ctime>
+#include <inference_engine.hpp>
+
 using namespace std;
 using namespace cv;
 using namespace InferenceEngine;
@@ -141,25 +142,7 @@ int main() {
     auto outputBlob = inferRequest.GetBlob(outputName);
     // 处理outputBlob获取检测结果(这只是一个示例，每个模型都有不同的处理方法，自己根据自己模型的输出结果形式进行推理结果的分析)
     auto output_data = outputBlob->buffer().as<float*>(); // 获取结果
-    size_t num_detections = outputBlob->getTensorDesc().getDims()[1]; // buffer()方法：这个方法通常是用来获取Blob中存储的原始数据的指针。由于Blob可以存储不同类型的数据（例如float、int等），因此buffer()方法返回的是一个通用的指针类型，需要根据实际存储的数据类型进行转换。
-    cout << "number_detect = " << num_detections << endl;
-    ofstream data_store("../data/result.txt");
-    for (size_t i = 0; i < num_detections; ++i) {
-    // output_data 是将结果展开而来根据class_id, confidence, xmin, ymin, xmax, ymax排序的
-        float class_id = output_data[i * 6 + 0];
-        float confidence = output_data[i * 6 + 1];
-        float xmin = output_data[i * 6 + 2];
-        float ymin = output_data[i * 6 + 3];
-        float xmax = output_data[i * 6 + 4];
-        float ymax = output_data[i * 6 + 5];
-        
-        // 将检测信息储存到文件中
-        if (data_store.is_open()) {
-            data_store << "Detection " <<  i << ": ClassID=" << class_id << " Confidence=" << confidence
-                  << " Box=(" << xmin << "," << ymin << "," << xmax << "," << ymax << ")\n";
-        }
-    }
-    data_store.close();
+	//根据不同的模型进行不同的数据处理
 
     return 0;
 
@@ -186,12 +169,13 @@ Blob::Ptr warpMat2Blob(Mat &image) {
 ## 五.示例代码(基于ov库的示例代码)
 
 ```c++
+#include <iostream>
+#include <fstream>
+#include <ctime>
+
 #include <openvino/openvino.hpp>
 #include <opencv2/opencv.hpp>
-#include<inference_engine.hpp>
-#include <fstream>
-#include <iostream>
-#include<ctime>
+#include <inference_engine.hpp>
 int main() {
     ov::Core core;
 
