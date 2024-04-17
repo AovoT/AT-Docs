@@ -67,162 +67,34 @@ apt-get update && apt-get install -y --no-install-recommends intel-opencl-icd in
 ```cmake
 cmake_minimum_required(VERSION 3.17)
 project(openvino)
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS src/*.cpp)
 
-find_package(OpenCV REQUIRED)
-find_package(OpenVINO REQUIRED) # 必须放在find_package(InferenceEngine REQUIRED)find_package(ngraph REQUIRED)前面
-find_package(InferenceEngine REQUIRED)
-find_package(ngraph REQUIRED)
+find_package(OpenVINO REQUIRED)
 
-add_library(${PROJECT_NAME}  src/openvino_ov.cpp src/openvino.cpp include/openvino.h)
+add_executable(${PROJECT_NAME}  ${sources})
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${InferenceEngine_INCLUDE_DIRS})
-target_include_directories(${PROJECT_NAME} PUBLIC ${ngraph_INCLUDE_DIRS})
-target_include_directories(${PROJECT_NAME} PUBLIC include/)
-
-target_link_libraries(${PROJECT_NAME}  ${OpenCV_LIBS} 
-                                        ${OpenVINO_LIBRARIES}
-                                        ${InferenceEngine_LIBRARIES}
-                                        ${ngraph_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} openvino::runtime)
+                                    
+                          
 ```
 
-## 四.示例代码(此示例代码是基于InferenceEngin写的)
+## 四.示例代码(用于查看GPU是否配置成功)
 
-```c++
-#include <openvino/openvino.hpp>
-#include <opencv2/opencv.hpp>
-#include<inference_engine.hpp>
-#include <fstream>
+```
 #include <iostream>
-#include<ctime>
-using namespace std;
-using namespace cv;
-using namespace InferenceEngine;
-string model_path = "";
-string image_path = "";
-Blob::Ptr warpMat2Blob(Mat &image);
+
+#include <openvino/openvino.hpp>
+
 int main() {
-        // 初始化Inference Engine
-    Core ie;
-
-    // 加载网络
-    auto network = ie.ReadNetwork(model_path);
-
-    // 设置输入配置
-    auto inputInfo = network.getInputsInfo().begin()->second; // 获取输入数据的一系列数据
-    auto inputName = network.getInputsInfo().begin()->first; // 获取输入数据的名称
-    //以下两行根据输入模型的不同修改不同的类型（output一样）
-    inputInfo->setLayout(Layout::NHWC); 
-    inputInfo->setPrecision(Precision::U8); 
-
-    // 设置输出配置
-    auto outputInfo = network.getOutputsInfo().begin()->second; // 获取输出的数据
-    auto outputName = network.getOutputsInfo().begin()->first; // 获取输出数据的名字
-    outputInfo->setPrecision(Precision::FP32);
-
-    // 加载模型到设备
-    auto executableNetwork = ie.LoadNetwork(network, "CPU"); //在cpu加载神经网络模型，也可以用gpu等等
-    auto inferRequest = executableNetwork.CreateInferRequest();
-
-    // 准备输入数据
-    Mat image = imread(image_path);
-    if (image.channels() != 3) {
-        cout << "image is not supported" << endl;
-        return -1;
+    // 初始化Inference Engine
+    ov::Core ie;
+    //获取可用设备
+    auto devices = ie.get_available_devices();
+    for (auto& device : devices) {
+        std::cout << device << "  ";
     }
-    //根据自己模型的不同  自己修改这个函数
-    Blob::Ptr imgBlob = warpMat2Blob(image);  // OpenCV Mat对象转换为OpenVINO Blob
-
-    inferRequest.SetBlob(inputName, imgBlob);
-
-    // 开始推理
-    inferRequest.Infer();
-
-    // 获取推理结果
-    auto outputBlob = inferRequest.GetBlob(outputName);
-    // 处理outputBlob获取检测结果(这只是一个示例，每个模型都有不同的处理方法，自己根据自己模型的输出结果形式进行推理结果的分析)
-    auto output_data = outputBlob->buffer().as<float*>(); // 获取结果
-    size_t num_detections = outputBlob->getTensorDesc().getDims()[1]; // buffer()方法：这个方法通常是用来获取Blob中存储的原始数据的指针。由于Blob可以存储不同类型的数据（例如float、int等），因此buffer()方法返回的是一个通用的指针类型，需要根据实际存储的数据类型进行转换。
-    cout << "number_detect = " << num_detections << endl;
-    ofstream data_store("../data/result.txt");
-    for (size_t i = 0; i < num_detections; ++i) {
-    // output_data 是将结果展开而来根据class_id, confidence, xmin, ymin, xmax, ymax排序的
-        float class_id = output_data[i * 6 + 0];
-        float confidence = output_data[i * 6 + 1];
-        float xmin = output_data[i * 6 + 2];
-        float ymin = output_data[i * 6 + 3];
-        float xmax = output_data[i * 6 + 4];
-        float ymax = output_data[i * 6 + 5];
-        
-        // 将检测信息储存到文件中
-        if (data_store.is_open()) {
-            data_store << "Detection " <<  i << ": ClassID=" << class_id << " Confidence=" << confidence
-                  << " Box=(" << xmin << "," << ymin << "," << xmax << "," << ymax << ")\n";
-        }
-    }
-    data_store.close();
-
+    std::cout << std::endl;
     return 0;
-
 }
-Blob::Ptr warpMat2Blob(Mat &image) {
-    Mat out_image = Mat::zeros(640, 640, CV_32FC3);
-    resize(image,out_image,out_image.size());
-    size_t channels = out_image.channels();
-    size_t height = out_image.rows;
-    size_t width = out_image.cols;
-    //注意  以下根据不同模型不同的输入数据形式进行不同的修改(借鉴开源时，可以先打印出模型输入输出数据的形式，然后更改)
-    TensorDesc tensorDesc(Precision::U8, {1, channels, height, width}, Layout::NHWC);
-    Blob::Ptr blob = make_shared_blob<uint8_t>(tensorDesc, out_image.data);
-    // 根据不同版本的openvion以上两行代码可报错  因为  在 有些Opesudo nVINO版本中，确实没有提供名为 make_shared_blob 的函数，一下为不同版本的通用写法(建议使用这个写法，增加容错)
-    TensorDesc tensorDesc(Precision::FP32, {1, height, width, channels}, Layout::NHWC);
-    Blob::Ptr blob = make_shared_blob<float>(tensorDesc);
-    blob->allocate();
-    auto buffer = blob->buffer().as<float*>();
-    std::copy(image.data, image.data + image.total() * image.channels(), buffer);
-    return blob;
-}
-```
-
-## 五.示例代码(基于ov库的示例代码)
-
-```c++
-#include <openvino/openvino.hpp>
-#include <opencv2/opencv.hpp>
-#include<inference_engine.hpp>
-#include <fstream>
-#include <iostream>
-#include<ctime>
-int main() {
-    ov::Core core;
-
-    ov::CompiledModel compiled_model = core.compile_model("Model_path", "Device"); //加载模型
-
-    auto model_info = core.read_model("Model_path"); // 获取模型信息(可以获得模型的输入和输出数据形式以及名字)
-
-
-    ov::InferRequest infer_request = compiled_model.create_infer_request(); //创建推理请求
-
-    // 加载图像
-    cv::Mat image = cv::imread("image_path");
-
-    // 转换图像数据类型为 float
-    cv::Mat float_image;
-    image.convertTo(float_image, CV_32F);
-
-    ov::Tensor input_tensor = infer_request.get_input_tensor();  //获取输入张量
-
-    memcpy(input_tensor.data<float>(), image.data, image.total() * sizeof(float) ); // 将图像数据以模型定义的形式拷到输入张量的数据缓存区(这边根据模型的不同需要进行修改)
-
-    infer_request.set_input_tensor(input_tensor); // 设置输入张量
-
-    infer_request.infer(); // 进行推理
-
-    auto output_tensor = infer_request.get_output_tensor(); //获取输出张量
-
-    float* output_data = output_tensor.data<float>(); //获取输出数据指针
-
-    // 根据不同的模型进行不同的数据处理
-}
-
 ```
 
