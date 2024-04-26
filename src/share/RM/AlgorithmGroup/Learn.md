@@ -155,6 +155,18 @@ Bilibili
  - https://www.bilibili.com/video/BV1Ci4y1L7ZZ/
  - https://www.bilibili.com/video/BV1Ub4y1a7PH/
 
+### 0.13.1 ROS2
+
+`doc`: https://docs.ros.org/en/iron/index.html
+
+ros标准: https://www.ros.org/reps/rep-0103.html
+
+`joint`: https://wiki.ros.org/urdf/XML/joint
+
+`Marker`: http://wiki.ros.org/rviz/DisplayTypes/Marker
+
+`foxglove`(可视化): https://docs.foxglove.dev/docs/introduction
+
 ## 0.14 SLAM
 
 ### 0.14.1 视觉SLAM
