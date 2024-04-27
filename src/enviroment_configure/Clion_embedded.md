@@ -1,6 +1,10 @@
 > 使用Clion进行嵌入式开发
 
-> 参考链接: https://zhuanlan.zhihu.com/p/145801160
+> 参考链接: 
+>
+> - zhihu: https://zhuanlan.zhihu.com/p/145801160
+>
+> - clion官方: https://www.jetbrains.com/help/clion/embedded-development.html
 
 # 一. 环境所需工具
 
@@ -28,7 +32,7 @@
 
 # 二. 安装
 
-## 2.1. STM32CubeMX
+## 1. STM32CubeMX
 
 Download: https://www.st.com/en/development-tools/stm32cubemx.html#get-software
 
@@ -51,21 +55,21 @@ Download: https://www.jetbrains.com/clion/
 
 ## 3. MinGW(Windons)
 
-### 2.3.1. 下载
+### 3.1. 下载
 
 Download: https://osdn.net/projects/mingw/releases/ 
 
-### 2.3.2 环境变量
+### 3.2 环境变量
 
 下载好后将 `xxx/bin` 添加到环境变量
 
-### 2.3.3. Clion配置
+### 3.3. Clion配置
 
 Setting -> Build, Execution, Deployment -> Toolchains
 
 ## 4. OpenOCD
 
-### 2.4.1. 下载
+### 4.1. 下载
 
 Windows: https://gnutoolchains.com/arm-eabi/openocd/
 
@@ -77,30 +81,44 @@ Linux:
 sudo apt install -y openocd
 ```
 
-### 2.4.2 Clion配置
+### 4.2 Clion配置
 
 ## 5. arm-none-eabi-gcc
 
-Download: https://developer.arm.com/downloads/-/gnu-rm
+Download:
+
+- https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads(新版)(recommend)
+
+- https://developer.arm.com/downloads/-/gnu-rm(较旧版本)
 
 ### Linux
 
 ```shell
-tar -xvjf ../gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2  # 解压
-echo "export PATH=???/bin${PATH:+:${PATH}}" >> ~/.bashrc  # ???? 为安装路径
+# .tar.bz2 文件
+tar -xvjf <filename>.tar.bz2
+# .tar.xz 文件
+tar -xvf <filename>.tar.xz
+
+echo "export PATH=???/bin${PATH:+:${PATH}}" >> ~/.profile  # ???? 为安装路径
 ```
 
 # 三. 文件模板
 
-### 3.1 stlink.cfg
+### 1. stlink.cfg
+
+具体文件名根据使用的调试器、芯片以及本地openocd文件名决定
+
+openocd文件路径
+
+- Linux:   /usr/share/openocd/scripts
+- Windows: 
 
 ```
 # 设置调试器（建议用stlink或daplink，原因可参考4.3）
 source [find interface/stlink.cfg]
-#source [find interface/cmsis-dap.cfg]
 
 # 调试接口（新版本会自动选择）
-#transport select hla_swd
+# transport select hla_swd
 
 # 设置芯片（F4系列）
 source [find target/stm32f4x.cfg] 
@@ -135,8 +153,6 @@ add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 
 参考连接：[openOCD和Jlink仿真器_openocd找不到jlink_nepqiu的博客-CSDN博客](https://blog.csdn.net/K_O_R_K/article/details/120615059)
 
-
-
 ### 4.5 下载可以，但调试时出现`GDB Server stopped, exit code 1`无法调试
 
 `OpenOCD`所在路径有空格存在，需换无空格目录并更改环境变量路径，（例如下方目录CLion 2023中间有空格）
@@ -148,3 +164,12 @@ Unexpected command line argument:CLion 2023.2.2\OpenOCD-20231002-0.12.0\share\op
 GDB Server stopped, exit code 1
 ```
 
+### 4.6 构建错误 ...../STM32F030F4PX_FLASH.ld:88: non constant or forward reference address expression for section .ARM.extab
+
+类似
+
+```cmake
+.ARM.extab (READONLY) :
+```
+
+这是由于arm-gnu 11.0版本一下版本没有 `READONLY` 语法
