@@ -151,10 +151,10 @@ const kPi = 3.14;  //常量声明用constexpr或const修饰
 ### **7.6函数命名**
 
 ```cpp
-void ChooseMax (int &num1, int &num2) { //首字母大写 大小写混合，取值和设值函数则要求与变量名匹配
+void ChooseMax(int &num1, int &num2) { //首字母大写 大小写混合，取值和设值函数则要求与变量名匹配
     ...
 }
-void Set_price (float &price) {
+void Set_price(float &price) {
     ...
 }
 ```
