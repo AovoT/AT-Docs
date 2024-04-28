@@ -149,10 +149,10 @@ class Person {
 public:
     ...
 public:
-    int m_age; //类的成员变量以下换线结尾
+    int m_age; // 类的成员变量以下换线结尾
 }
 
-//结构体不用
+// 结构体不用
 struct Point { 
     int x;
     int y;
