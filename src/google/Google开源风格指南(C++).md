@@ -18,10 +18,10 @@
 
 ```cpp
 //路径foo/src/bar/baz.h
-#ifndef FOO_SRC_BAR_BAZ_H_  //是否被定义
-#define FOO_SRC_BAR_BAZ_H_  //若没有定义则此处定义
+#ifndef FOO_BAR_BAZ_H_  //是否被定义
+#define FOO_BAR_BAZ_H_  //若没有定义则此处定义
 ...
-#endif  // FOO_SRC_BAR_BAZ_H_
+#endif  // FOO_BAR_BAZ_H_
 ```
 
 ### 避免使用前向声明，应直接导入头文件
