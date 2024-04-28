@@ -11,15 +11,16 @@
 格式:
 
 ```cpp
-<项目>_<路径>_<文件名>_H_   //均大写
+<项目>_<路径>_<文件名>_H_   // 均大写
+// 写注释时，空一格
 ```
 
 示例：
 
 ```cpp
-//路径foo/src/bar/baz.h
-#ifndef FOO_BAR_BAZ_H_  //是否被定义
-#define FOO_BAR_BAZ_H_  //若没有定义则此处定义
+// 路径foo/src/bar/baz.h
+#ifndef FOO_BAR_BAZ_H_  // 是否被定义
+#define FOO_BAR_BAZ_H_  // 若没有定义则此处定义
 ...
 #endif  // FOO_BAR_BAZ_H_
 ```
@@ -29,25 +30,25 @@
 ### #include导入的顺序
 
 ```cpp
-//路径相对于项目源代码路径，其中不要使用 . 或者 ..
-//引入google-awesome-project/src/base/logging.h头文件
-//logging.h相对项目源码路径为base/logging.h
+// 路径相对于项目源代码路径，其中不要使用 . 或者 ..
+// 引入google-awesome-project/src/base/logging.h头文件
+// logging.h相对项目源码路径为base/logging.h
 #include <base/logging.h>
 ```
 
 ```cpp
-//顺序：配套的头文件, C 语言系统库头文件, C++ 标准库头文件, 其他库的头文件, 本项目的头文件.
-//使用空格分开，同一分组按照首字母排序
-//在armor_auto_aim.cpp中
-#include <armor_auto_aim.h> //配套头文件
+// 顺序：配套的头文件, C 语言系统库头文件, C++ 标准库头文件, 其他库的头文件, 本项目的头文件.
+// 使用空格分开，同一分组按照首字母排序
+// 在armor_auto_aim.cpp中
+#include <armor_auto_aim.h> // 配套头文件
 
-#include <math.h>  //C语言
+#include <math.h>  // C语言
 
-#include <iostream>  //C++
+#include <iostream>  // C++
 
-#include <opencv2/opencv.hpp>  //第三方库
+#include <opencv2/opencv.hpp>  // 第三方库
 
-#include <serial_port/VCOMCOMM.h>  //本项目其他头文件
+#include <serial_port/VCOMCOMM.h>  // 本项目其他头文件
 ```
 
 可以有条件的导入头文件，使用``#ifndef`` ``#define`` `` #endif``即可实现
@@ -116,18 +117,18 @@ inline namespace inner {
 定义类时，类的头文件和源文件要成对出现
 
 ```cpp
-//文件名全部小写，可以包含下换线或连字符，下换线更好
+// 文件名全部小写，可以包含下换线或连字符，下换线更好
 color_detect.h
-//对应源文件
+// 对应源文件
 color_detect.cpp
     
-//内联函数定义要放在.h文件中，如果内联函数比较短，就直接将实现也放在 .h 中
+// 内联函数定义要放在.h文件中，如果内联函数比较短，就直接将实现也放在 .h 中
 ```
 
 ### **7.3类型命名**
 
 ```cpp
-//类型名的每个首字母均大写，不包含下换线，连着写
+// 类型名的每个首字母均大写，不包含下换线，连着写
 class CameraClass {
     ...
 }
@@ -135,20 +136,20 @@ struct ChoosePoint {
     ...
 }
 
-//类型名指类，结构体，类型定义typedef,枚举，类型模版参数
+// 类型名指类，结构体，类型定义typedef,枚举，类型模版参数
 ```
 
 ### **7.4变量命名**
 
 ```cpp
-//变量（包含函数参数）和数据成员名一律小写，单词之间用下划线连接
+// 变量（包含函数参数）和数据成员名一律小写，单词之间用下划线连接
 int apple_price;
 
 class Person {
 public:
     ...
 public:
-    int age_; //类的成员变量以下换线结尾
+    int m_age; //类的成员变量以下换线结尾
 }
 
 //结构体不用
@@ -161,17 +162,14 @@ struct Point {
 ### **7.5常量命名**
 
 ```cpp
-//常量命名以k开头，大小写混合
-const kPi = 3.14;  //常量声明用constexpr或const修饰
+// 常量命名以k开头，大小写混合
+const kPi = 3.14;  // 常量声明用constexpr或const修饰
 ```
 
 ### **7.6函数命名**
 
 ```cpp
-void ChooseMax(int &num1, int &num2) { //首字母大写 大小写混合，取值和设值函数则要求与变量名匹配
-    ...
-}
-void Set_price(float &price) {
+void ChooseMax(int &num1, int &num2) { // 首字母大写 大小写混合，取值和设值函数则要求与变量名匹配
     ...
 }
 ```
@@ -179,17 +177,17 @@ void Set_price(float &price) {
 ### **7.7命名空间命名**
 
 ```cpp
-namespace selfshoot; //使用小写，不要缩写
+namespace selfshoot; // 使用小写，不要缩写
 ```
 
 ### **7.8枚举命名**
 
 ```cpp
-enum LightColor {  //和常量一样:  以k开头，大小写混合 (建议)
+enum LightColor {  // 和常量一样:  以k开头，大小写混合 (建议)
     kRed,
     kBlue,
 };
-enum LightColor {  //和枚举一样：全部大写，用下划线连接
+enum LightColor {  // 和枚举一样：全部大写，用下划线连接
     BRD,
     BLUE,
 };
@@ -198,7 +196,7 @@ enum LightColor {  //和枚举一样：全部大写，用下划线连接
 ### **7.9宏命名**
 
 ```CPP
-#define VIDEO_ADDRESS /home/mzy/Videos/blue.mp4  //全部大写，下划线连接
+#define VIDEO_ADDRESS /home/mzy/Videos/blue.mp4  // 全部大写，下划线连接
 ```
 
 
