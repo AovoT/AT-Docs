@@ -1,3 +1,28 @@
+
+<div align="center">
+   <a href="https://blog.sunguoqi.com/">
+   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=435&lines=printf(%22Hello%2C%20World%22);欢迎来到河北科技大学AovoT战队!&center=true&size=27" />
+   </a>
+</div>
+
+<div align="center">
+<picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/gh/sun0225SUN/sun0225SUN/assets/images/coding.gif" />
+   <source media="(prefers-color-scheme: light)" srcset="https://cdn.jsdelivr.net/gh/sun0225SUN/sun0225SUN/assets/images/developer.svg" height="225px" />
+   <img src="https://cdn.jsdelivr.net/gh/sun0225SUN/sun0225SUN/assets/images/coding.gif" />
+</picture>
+</div>
+
+
+<div align="center">
+    <a href="#"><img src="https://img.shields.io/badge/Hebust-河科大-blue" /></a>&emsp;
+    <a href="#"><img src="https://img.shields.io/badge/vision-视觉-c32136" /></a>&emsp;
+    <a href="#"><img src="https://img.shields.io/badge/robotmaster-机甲大师-8c36db" /></a>&emsp;
+    <a href="#"><img src="https://img.shields.io/badge/Artificial_Intelligence-人工智能-07c160" /></a>&emsp;
+    <a href="#"><img src="https://img.shields.io/badge/Programmer-程序员-ff69b4" /></a>&emsp;
+</div>
+
+
 > AT 文档
 > 
 > 创建日期: 2023/9/21 20:00
@@ -29,3 +54,5 @@
 - [RM开源](https://github.com/AovoT/AT-Docs/blob/master/src/share/RM/AlgorithmGroup/OpenSources.md)
 - [pip换源 && Anaconda入门](https://github.com/AovoT/AT-Docs/tree/master/src/language/python)
 - [工业相机选型](https://github.com/AovoT/AT-Docs/blob/master/src/hardware/camera/%E7%9B%B8%E6%9C%BA%E9%80%89%E5%9E%8B.md)
+
+<img src="https://cdn.jsdelivr.net/gh/sun0225SUN/sun0225SUN/assets/images/man.png" width="250" height="250" />
