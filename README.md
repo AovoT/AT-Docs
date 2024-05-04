@@ -1,10 +1,5 @@
 
 <div align="center">
-   <a href="https://blog.sunguoqi.com/">
-   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=435&lines=printf(%22Hello%2C%20World%22);欢迎来到河北科技大学AovoT战队!&center=true&size=27" />
-   </a>
-</div>
-<div align="center">
     <a href="#"><img src="https://img.shields.io/badge/Hebust-河科大-blue" /></a>&emsp;
     <a href="#"><img src="https://img.shields.io/badge/vision-视觉-c32136" /></a>&emsp;
     <a href="#"><img src="https://img.shields.io/badge/robotmaster-机甲大师-8c36db" /></a>&emsp;
