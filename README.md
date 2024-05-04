@@ -19,9 +19,9 @@
 
 开始请阅读: https://github.com/AovoT/AT-Docs/blob/master/Docs/start.md
 
-如需引用仓库文档只**需表明出处链接**即可:star::star::star:
+如需引用仓库文档只**需表明出处链接**即可  :star: :star: :star:
 
-这里包含:point_down::point_down::point_down:
+这里包含  :point_down: :point_down: :point_down:
 - [Ubuntu环境配置](https://github.com/AovoT/AT-Docs/blob/master/src/enviroment_configure/Ubuntu.md)
   - 基本安装
   - NVIDIA显卡驱动 && CUDA && CUDNN
