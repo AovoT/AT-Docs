@@ -97,12 +97,7 @@ sudo apt-get install  liblapack-dev libsuitesparse-dev libcxsparse3 libgflags-de
 git clone https://github.com/ceres-solver/ceres-solver
 
 # 进入下载路径，编译
-cd ceres-solver/
-mkdir build
-cd build
-cmake ..
-make -j8  # 巨慢
-sudo make install
+cmake -B build -G Ninja && cmake --build build -j8 && sudo cmake --build build --target install
 ```
 
 ## 2.`imu_utils`
@@ -208,10 +203,57 @@ github:
 #####################
 sudo apt update
 
-sudo apt install -y dpkg-dev build-essential python3-dev freeglut3-dev libgl1-mesa-dev libglu1-mesa-dev libgstreamer-plugins-base1.0-dev libgtk-3-dev libjpeg-dev libnotify-dev libpng-dev libsdl2-dev libsm-dev libtiff-dev libwebkit2gtk-4.0-dev libxtst-dev
-0-dev libgtk-3-dev libjpeg-dev libnotify-dev libpng-dev libsdl2-dev libsm-dev libtiff-dev libwebkit2gtk-4.0-dev libxtst-dev
+sudo apt install -y \
+                    dpkg-dev \
+                    build-essential \
+                    python3-dev \
+                    freeglut3-dev \
+                    libgl1-mesa-dev \
+                    libglu1-mesa-dev \
+                    libgstreamer-plugins-base1.0-dev \
+                    libgtk-3-dev libjpeg-dev libnotify-dev \
+                    libpng-dev \
+                    libsdl2-dev \
+                    libsm-dev \
+                    libtiff-dev \
+                    libwebkit2gtk-4.0-dev \
+                    libxtst-dev\
+                    0-dev \
+                    libgtk-3-dev \
+                    libjpeg-dev \
+                    libnotify-dev \
+                    libpng-dev \
+                    libsdl2-dev \
+                    libsm-dev \
+                    libtiff-dev \
+                    libwebkit2gtk-4.0-dev \
+                    libxtst-dev
 
-sudo apt install -y python3-setuptools python3-rosinstall ipython3 libeigen3-dev libboost-all-dev doxygen libopencv-dev ros-noetic-vision-opencv ros-noetic-image-transport-plugins ros-noetic-cmake-modules python3-software-properties software-properties-common libpoco-dev python3-matplotlib python3-scipy python3-git python3-pip libtbb-dev libblas-dev liblapack-dev libv4l-dev python3-catkin-tools python3-igraph libsuitesparse-dev libgtk-3-dev
+sudo apt install -y \
+                    python3-setuptools \
+                    python3-rosinstall \
+                    ipython3 \
+                    libeigen3-dev \
+                    libboost-all-dev \
+                    doxygen \
+                    libopencv-dev \
+                    ros-noetic-vision-opencv \
+                    ros-noetic-image-transport-plugins \
+                    ros-noetic-cmake-modules \
+                    python3-software-properties \
+                    software-properties-common \
+                    libpoco-dev python3-matplotlib \
+                    python3-scipy \
+                    python3-git \
+                    python3-pip \
+                    libtbb-dev \
+                    libblas-dev \
+                    liblapack-dev \
+                    libv4l-dev \
+                    python3-catkin-tools \
+                    python3-igraph \
+                    libsuitesparse-dev \
+                    libgtk-3-dev
 
 pip3 install wxPython opencv-python matplotlib pycryptodomex gnupg scipy python-igraph pycairo
 
