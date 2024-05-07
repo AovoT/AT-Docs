@@ -1,2 +1,2 @@
 - [相机标定](https://github.com/AovoT/AT-Docs/tree/master/src/calibrate/camera.md)
-- [相机、IMU 标定](https://github.com/Ma-zeyu/AT-Docs/blob/master/src/calibrate/camear-imu_calibrate.md)
+- [相机、IMU 标定](https://github.com/AovoT/AT-Docs/tree/master/src/calibrate/camera-imu_calibrate.md)

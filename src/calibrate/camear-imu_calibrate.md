@@ -32,10 +32,8 @@ Mac: https://www.wch.cn/download/CH341SER_MAC_ZIP.html
 旧驱动路径: `/lib/modules/$(uname -r)/kernel/drivers/usb/serial/ch341.ko`
 
 ```shell
-# 解压文件夹
-make
-sudo cp ch341.ko /lib/modules/$(uname -r)/kernel/drivers/usb/serial
-sudo depmod
+cp ch341.ko /lib/modules/$(uname -r)/kernel/drivers/usb/serial
+depmod
 ```
 
 
@@ -45,7 +43,6 @@ sudo depmod
 ```shell
 git clone https://github.com/Xueming10wu/ROS-WT931.git --depth=1
 
-# 进入上面下载的文件夹内
 sudo cp wt931.rules /etc/udev/rules.d/  # 复制设备规则
 
 # 当前用户加入 串口组,赋予权限
@@ -67,7 +64,6 @@ reboot
 ```shell
 sudo apt install -y libdw-dev
 
-# 自己建文件夹
 cd ~/kalibr_ws/src
 git clone https://github.com/gaowenliang/code_utils.git --depth=1
 
@@ -83,21 +79,8 @@ add_executable(sumpixel_test   src/sumpixel_test.cpp )
 target_link_libraries(sumpixel_test dw ${OpenCV_LIBS})
 ###################### end #####################################
 
-# 前提只装ROS1,装好Ceres库再执行下面语句
 cd ..
 catkin_make -DCMAKE_BUILD_TYPE=Release -j$(nproc)
-```
-
-```shell
-# 安装Ceres库
-# 安装依赖
-sudo apt-get install  liblapack-dev libsuitesparse-dev libcxsparse3 libgflags-dev libgoogle-glog-dev libgtest-dev
-
-# 下载源码
-git clone https://github.com/ceres-solver/ceres-solver
-
-# 进入下载路径，编译
-cmake -B build -G Ninja && cmake --build build -j8 && sudo cmake --build build --target install
 ```
 
 ## 2.`imu_utils`
@@ -125,7 +108,7 @@ touch kalibr_ws/src/imu_utils/launch/my_imu.launch
 <launch>
     <node pkg="imu_utils" type="imu_an" name="imu_an" output="screen">
         <!--imu数据topic-->
-        <param name="imu_topic" type="string" value= "/imu/data"/>
+        <param name="imu_topic" type="string" value= "/imu_data"/>
         <!--imu名称-->
         <param name="imu_name" type="string" value= "wt931"/>
         <!--标定数据保存目录-->
@@ -138,15 +121,8 @@ touch kalibr_ws/src/imu_utils/launch/my_imu.launch
 ```
 
 ```shell
-# 静止状态采集IMU数据，录制为ros包  200min
-rosbag record /imu/data -O imu_xsens.bag
-```
-
-```shell
 # /imu_data 话题发布要标定的imu数据
 roslaunch imu_utils my_imu.launch
-rosbag play -r 200 imu_xsens.bag
-# catkin_ws/src/imu_utils/data/my_imu 文件夹下会出现一系列data文件，其中xsens_imu_param.yaml中保存噪声和随机游走的系数值
 ```
 
 标定结果参考
@@ -187,8 +163,6 @@ Acc:
 
 # 二. Kalibr编译
 
-相机标定
-
 github:
 
 - https://github.com/ethz-asl/kalibr
@@ -203,65 +177,13 @@ github:
 #####################
 sudo apt update
 
-sudo apt install -y \
-                    dpkg-dev \
-                    build-essential \
-                    python3-dev \
-                    freeglut3-dev \
-                    libgl1-mesa-dev \
-                    libglu1-mesa-dev \
-                    libgstreamer-plugins-base1.0-dev \
-                    libgtk-3-dev libjpeg-dev libnotify-dev \
-                    libpng-dev \
-                    libsdl2-dev \
-                    libsm-dev \
-                    libtiff-dev \
-                    libwebkit2gtk-4.0-dev \
-                    libxtst-dev\
-                    0-dev \
-                    libgtk-3-dev \
-                    libjpeg-dev \
-                    libnotify-dev \
-                    libpng-dev \
-                    libsdl2-dev \
-                    libsm-dev \
-                    libtiff-dev \
-                    libwebkit2gtk-4.0-dev \
-                    libxtst-dev
+sudo apt install -y dpkg-dev build-essential python3-dev freeglut3-dev libgl1-mesa-dev libglu1-mesa-dev libgstreamer-plugins-base1.0-dev libgtk-3-dev libjpeg-dev libnotify-dev libpng-dev libsdl2-dev libsm-dev libtiff-dev libwebkit2gtk-4.0-dev libxtst-dev
 
-sudo apt install -y \
-                    python3-setuptools \
-                    python3-rosinstall \
-                    ipython3 \
-                    libeigen3-dev \
-                    libboost-all-dev \
-                    doxygen \
-                    libopencv-dev \
-                    ros-noetic-vision-opencv \
-                    ros-noetic-image-transport-plugins \
-                    ros-noetic-cmake-modules \
-                    python3-software-properties \
-                    software-properties-common \
-                    libpoco-dev python3-matplotlib \
-                    python3-scipy \
-                    python3-git \
-                    python3-pip \
-                    libtbb-dev \
-                    libblas-dev \
-                    liblapack-dev \
-                    libv4l-dev \
-                    python3-catkin-tools \
-                    python3-igraph \
-                    libsuitesparse-dev \
-                    libgtk-3-dev
+sudo apt install -y python3-setuptools python3-rosinstall ipython3 libeigen3-dev libboost-all-dev doxygen libopencv-dev ros-noetic-vision-opencv ros-noetic-image-transport-plugins ros-noetic-cmake-modules python3-software-properties software-properties-common libpoco-dev python3-matplotlib python3-scipy python3-git python3-pip libtbb-dev libblas-dev liblapack-dev libv4l-dev python3-catkin-tools python3-igraph libsuitesparse-dev libgtk-3-dev
 
 pip3 install wxPython opencv-python matplotlib pycryptodomex gnupg scipy python-igraph pycairo
 
 pip3 install --upgrade pip setuptools sip
-
-# 报错ERROR: launchpadlib 1.10.13 requires testresources, which is not installed.
-# 安装依赖项 testresources 即可解决
-pip install testresources
 ```
 
 ```shell
@@ -282,68 +204,18 @@ pip install -U \
 mkdir ~/kalibr_ws/src && cd ~/kalibr_ws/src
 git clone --recursive https://github.com/ori-drs/kalibr && cd ..
 # source /opt/ros/noetic/setup.bash
-catkin_make -DCMAKE_BUILD_TYPE=Release -j16  # 不要弄32，电脑会崩溃的
+catkin__make -DCMAKE_BUILD_TYPE=Release -j$(nproc)
 ```
 
 ## 3. 使用
 
 wiki: https://github.com/ethz-asl/kalibr/wiki
 
-**听不懂英文解决办法：**
-
-使用谷歌浏览器，打开设置，左侧选择无障碍，开启实时字幕
-
-### 3.1 前期准备
-
-标定板下载，yaml参数：https://github.com/ethz-asl/kalibr/wiki/downloads
-
-修改tagsize和tagspacing参数，由下图测量得：
-
-![](/home/mzy/Pictures/picture1.png)
-
-### 3.2 具体实施
-
-对单目相机标定
-
-```shell
-# 运行相机节点
-rosrun sensor_driver stereo_left_node
-
-# 修改话题频率4(官方推荐)
-rosrun topic_tools throttle messages /stereo_left_node/left 4.0 /left  
-
-# 录制bag数据
-rosbag record -0 stereo_calibar.bag /left_img  # 结果保存到当前目录
-
-# 启动ros相关指令
-source devel/setup.bash
-
-# 进入到kalibr工具目录下 (/home/mzy/kalibr_ws/src/kalibr)
-rosrun kalibr kalibr_calibrate_cameras --bag xxx/stereo_calibra.bag --topics /left_img --models  omni-radtan --target xxx/april_6x6_80x80cm_A0.yaml
-
-# 结束后会出现三个文件
-# camchain的.yaml文件是后续联合标定要继续用到的，里面包含了所需的相机的内外参
-```
-
-```shell
-# 对参数的说明
-1. xxx/stereo_calibra.bag stpe3 录制的bag路径
-2. /left_img /right_img 话题名
-3. omni-radtan 相机/畸变模型，有几目相机就要写几个
-4. xxx/april_6x6_80x80cm_A0.yaml 标定板配置文件 
-5. –show-extraction　是在标定过程中的一个显示界面，可以看到图片提取的过程，可以不要；
-6. –approx-sync 0.05　时间戳不对齐问题
-7. –bag-from-to后面是想要使用数据时间段的起始时间和结束时间，单位：秒(s)，这个参数可以剔除掉刚开始录制和结束时一些出入视野等画面
-
-# 示例
-rosrun kalibr kalibr_calibrate_cameras --bag src/data/2021-09-02-16-24-01.bag --topics /left_img  --models omni-radtan  --target src/data/april_6x6_80x80cm_A0.yaml --show-extraction --approx-sync 0.05
-```
-
 # 三.IMU-Camera联合标定
 
 IMU-Camera联合标定需要三个文件
 
-- camera.yaml   包含相机内参
+- camera.yaml  包含相机内参
 - imu.yaml         包含imu的参数
 - target.yaml      标定板的参数
 
@@ -482,10 +354,4 @@ IMU0:
   time offset with respect to IMU0: 0.0 [s]
 
 ```
-
-# 四，补充
-
-供参考：
-
-https://blog.csdn.net/qq_43200940/article/details/127073801?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171478398216800227496047%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=171478398216800227496047&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-127073801-null-null.142
 
