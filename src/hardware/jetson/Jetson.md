@@ -76,7 +76,7 @@ sudo ./flash.sh rtso-6002e-v1.2 external
 即  **echo ‘64248bb5-57c3-4d96-8e6e-93a6b5ce815a’ > bootloader/l4t-rootfs-uuid.txt_ext** 不要tab键自动补全，否则l4t-rootfs-uuid.txt_ext会自动补全成下划线
 
 
-## 3.Jetpack安装
+## 3.Jetpack安
 
 [sdkmanager下载网址](https://developer.nvidia.com/sdk-manager)
 
@@ -97,6 +97,13 @@ sudo ./flash.sh rtso-6002e-v1.2 external
 参考  Jetson安装`opencv4.5.1`和`QT5`方法配置`vnc`和中文输入法.pdf，位于帮助文档->中文->Jetson系统软件配置
 
 opencv软件包位于`AT-Docs/src/hardware/jetson/software_package/jetson_opencv`
+
+## 5.issue
+最近因为不知名原因jetpack不可烧录cuda要选择安装的话指令执行
+sudo apt-get install nvidia-jetpack
+sudo apt-get install jetson-stats
+参考  https://blog.csdn.net/ayxc_ve/article/details/134181991
+一定要重装opencv才能使用cuda加速
 
 
 
