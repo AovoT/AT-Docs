@@ -96,7 +96,16 @@ sudo ./flash.sh rtso-6002e-v1.2 external
 
 参考  Jetson安装`opencv4.5.1`和`QT5`方法配置`vnc`和中文输入法.pdf，位于帮助文档->中文->Jetson系统软件配置
 
-opencv软件包位于`AT-Docs/src/hardware/jetson/software_package/jetson_opencv`
-
-
-
+ aptopencv软件包位于`AT-Docs/src/hardware/jetson/software_package/jetson_opencv
+## 5.另一种装法
+最近不知道什么原因用jetpack烧录cuda老是寄，用最直接的方法来下载
+sudo apt install nvidia-jetpack
+sudo vim ~/.bashrc
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+更新一下环境安装jetson-stats
+sudo -H pip3 install jetson-stats
+sudo jtop #之后就可以查看自己的jetpack以及cuda的配置
+默认的opencv是不可以使用cuda加速的需要卸载重新安装
+参考   https://blog.csdn.net/ayxc_ve/article/details/134181991
+建议opencv仍按照队库的方法安装
